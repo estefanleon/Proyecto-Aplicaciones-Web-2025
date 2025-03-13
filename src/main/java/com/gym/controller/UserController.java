@@ -1,4 +1,3 @@
-
 package com.gym.controller;
 
 import com.gym.domain.User;
@@ -24,26 +23,36 @@ public class UserController {
         return "/user/listado";
     }
 
-    // 📌 Eliminar usuario
-    @GetMapping("/eliminar/{idUser}")
-    public String eliminar(User user) {
-        userService.delete(user);
-        return "redirect:/user/listado";
-    }
-
-    // 📌 Modificar usuario (cargar formulario con los datos)
-    @GetMapping("/modificar/{idUser}")
-    public String modificar(User user, Model model) {
-        user = userService.getUser(user);
+    // 📌 Agregar nuevo usuario (formulario)
+    @GetMapping("/agregar")
+    public String agregar(Model model) {
+        User user = new User();
         model.addAttribute("user", user);
         return "/user/modifica";
     }
 
     // 📌 Guardar usuario (nuevo o modificado)
     @PostMapping("/guardar")
-    public String guardar(User user) {
+    public String guardar(@ModelAttribute("user") User user) {
         userService.save(user);
         return "redirect:/user/listado";
     }
-}
 
+    // 📌 Modificar usuario (cargar datos en el formulario)
+    @GetMapping("/modificar/{idUser}")
+    public String modificar(@PathVariable("idUser") Long id, Model model) {
+        User user = userService.getUser(id);
+        if (user != null) {
+            model.addAttribute("user", user);
+            return "/user/modifica";
+        }
+        return "redirect:/user/listado"; // Si el usuario no existe, redirigir
+    }
+
+    // 📌 Eliminar usuario
+    @GetMapping("/eliminar/{idUser}")
+    public String eliminar(@PathVariable("idUser") Long id) {
+        userService.deleteUser(id);
+        return "redirect:/user/listado";
+    }
+}
