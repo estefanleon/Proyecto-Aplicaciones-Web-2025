@@ -2,76 +2,78 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
 
-<head th:fragment="head">
-    <title>GymApp</title>
-    <meta charset="UTF-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <head th:fragment="head">
+        <title>GymApp</title>
+        <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
-    <!-- ✅ Favicon -->
-    <link rel="icon" type="image/png" sizes="32x32" href="/fav/favicon-32x32.png"/>
+        <!-- ✅ Favicon -->
+        <link rel="icon" type="image/png" sizes="32x32" href="/fav/favicon-32x32.png"/>
 
-    <!-- ✅ Bootstrap y FontAwesome desde WebJars -->
-    <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.0/css/bootstrap.min.css}"/>
-    <link rel="stylesheet" th:href="@{/webjars/font-awesome/6.4.2/css/all.min.css}"/>
+        <!-- ✅ Bootstrap y FontAwesome desde WebJars -->
+        <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.0/css/bootstrap.min.css}"/>
+        <link rel="stylesheet" th:href="@{/webjars/font-awesome/6.4.2/css/all.min.css}"/>
 
-    <!-- ✅ CSS personalizado -->
-    <link rel="stylesheet" th:href="@{/css/styles.css}"/>
+        <!-- ✅ CSS personalizado -->
+        <link rel="stylesheet" th:href="@{/css/styles.css}"/>
 
-    <!-- ✅ JavaScript de Bootstrap y jQuery -->
-    <script th:src="@{/webjars/jquery/3.6.0/jquery.min.js}"></script>
-    <script th:src="@{/webjars/bootstrap/5.3.0/js/bootstrap.bundle.min.js}"></script>
-</head>
+        <!-- ✅ JavaScript de Bootstrap y jQuery -->
+        <script th:src="@{/webjars/jquery/3.6.0/jquery.min.js}"></script>
+        <script th:src="@{/webjars/bootstrap/5.3.0/js/bootstrap.bundle.min.js}"></script>
+    </head>
 
-<body>
+    <body>
 
-    <!-- ✅ NAVBAR (Encabezado) -->
-    <header th:fragment="header" class="header">
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <div class="container">
-                <a th:href="@{/}" class="navbar-brand">GymApp</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav me-auto">
-                        <li class="nav-item"><a class="nav-link" th:href="@{/user/listado}">Usuarios</a></li>
-                        <li class="nav-item"><a class="nav-link" th:href="@{/clase/listado}">Clases</a></li>
-                        <li class="nav-item px-2"><a class="nav-link" th:href="@{/matricula}">Matrícula</a></li>
-                        <li class="nav-item px-2"><a class="nav-link" th:href="@{/contacto}">Contacto</a></li>
-                    </ul>
+        <!-- ✅ NAVBAR (Encabezado) -->
+        <header th:fragment="header" class="header">
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+                <div class="container">
+                    <a th:href="@{/}" class="navbar-brand">GymApp</a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                        <ul class="navbar-nav me-auto">
+                            <li class="nav-item"><a class="nav-link" th:href="@{/user/listado}">Usuarios</a></li>
+                            <li class="nav-item"><a class="nav-link" th:href="@{/clase/listado}">Clases</a></li>
+                            <li class="nav-item px-2"><a class="nav-link" th:href="@{/matricula}">Matrícula</a></li>
+                            <li class="nav-item px-2"><a class="nav-link" th:href="@{/contacto}">Contacto</a></li>
+<li class="nav-item px-2"><a class="nav-link" th:href="@{/entrenadores}">Entrenadores</a></li>
 
-                    <ul class="navbar-nav">
-                        <!-- ✅ Mostrar botón de login solo si NO hay usuario autenticado -->
-                        <li class="nav-item" th:if="${session.usuario == null}">
-                            <a class="nav-link btn btn-primary text-white" th:href="@{/login}">Iniciar Sesión</a>
-                        </li>
+                        </ul>
 
-                        <!-- ✅ Mostrar el nombre del usuario si está autenticado -->
-                        <li class="nav-item dropdown" th:if="${session.usuario != null}">
-                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
-                               data-bs-toggle="dropdown" aria-expanded="false">
-                                <i class="fas fa-user"></i> <span th:text="${session.usuario.name}"></span>
-                            </a>
-                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
-                                <li><a class="dropdown-item" th:href="@{/logout}">Cerrar Sesión</a></li>
-                            </ul>
-                        </li>
-                    </ul>
+                        <ul class="navbar-nav">
+                            <!-- ✅ Mostrar botón de login solo si NO hay usuario autenticado -->
+                            <li class="nav-item" th:if="${session.usuario == null}">
+                                <a class="nav-link btn btn-primary text-white" th:href="@{/login}">Iniciar Sesión</a>
+                            </li>
 
+                            <!-- ✅ Mostrar el nombre del usuario si está autenticado -->
+                            <li class="nav-item dropdown" th:if="${session.usuario != null}">
+                                <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                                   data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="fas fa-user"></i> <span th:text="${session.usuario.name}"></span>
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                                    <li><a class="dropdown-item" th:href="@{/logout}">Cerrar Sesión</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                    </div>
                 </div>
-            </div>
-        </nav>
-    </header>
+            </nav>
+        </header>
 
-    <!-- ✅ CONTENIDO DINÁMICO -->
-    <main class="container mt-4">
-        <th:block th:replace="~{::content}"></th:block>
-    </main>
+        <!-- ✅ CONTENIDO DINÁMICO -->
+        <main class="container mt-4">
+            <th:block th:replace="~{::content}"></th:block>
+        </main>
 
-    <!-- ✅ FOOTER -->
-    <footer th:fragment="footer" class="p-3 mt-4 bg-dark text-white text-center">
-        <p>&COPY; 2025 GymApp - Todos los derechos reservados</p>
-    </footer>
+        <!-- ✅ FOOTER -->
+        <footer th:fragment="footer" class="p-3 mt-4 bg-dark text-white text-center">
+            <p>&COPY; 2025 GymApp - Todos los derechos reservados</p>
+        </footer>
 
-</body>
+    </body>
 </html>

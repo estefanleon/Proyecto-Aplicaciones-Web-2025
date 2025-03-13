@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{layout/plantilla :: head}">
+    <title>Entrenadores - GymApp</title>
+    <meta charset="UTF-8"/>        
+</head>
+
+<body>
+    <header th:replace="~{layout/plantilla :: header}"/>
+    
+    <!-- Sección de Entrenadores -->
+    <section class="container mt-5">
+        <h2 class="text-center fw-bold">Conoce a Nuestros Entrenadores</h2>
+        <p class="text-center">Profesionales altamente capacitados para ayudarte a alcanzar tus objetivos.</p>
+        
+        <div class="row">
+            <div class="col-md-4 mb-4" th:each="entrenador : ${entrenadores}">
+                <div class="card text-center">
+                    <img th:src="@{${entrenador.imagen}}" class="card-img-top" alt="Entrenador">
+                    <div class="card-body">
+                        <h5 class="card-title" th:text="${entrenador.nombre}"></h5>
+                        <p class="card-text" th:text="${entrenador.especialidad}"></p>
+                        <p><strong>Experiencia:</strong> <span th:text="${entrenador.experiencia}"></span> años</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer th:replace="~{layout/plantilla :: footer}"/>
+</body>
+</html>
