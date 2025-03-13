@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+
+<html  
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:th="http://www.thymeleaf.org"
+    xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6"
+>
+<head th:replace="~{layout/plantilla :: head}">
+    <title>GymApp</title>
+    <meta charset="UTF-8"/>
+</head>
+<body>
+
+    <header th:replace="~{layout/plantilla :: header}"/>
+
+    <!-- Contenido principal -->
+    <div class="container text-center mt-5">
+        <h1 class="display-4">Bienvenido a GymApp</h1>
+        <p class="lead">Administra tus usuarios, clases y membresías de manera eficiente.</p>
+        
+        <a th:href="@{/user/listado}" class="btn btn-success btn-lg">Ver Usuarios</a>
+        <a th:href="@{/clase/listado}" class="btn btn-warning btn-lg">Ver Clases</a>
+        <a th:href="@{/membresia/listado}" class="btn btn-info btn-lg">Ver Membresías</a>
+    </div>
+
+    <footer th:replace="~{layout/plantilla :: footer}"/>
+
+</body>
+</html>

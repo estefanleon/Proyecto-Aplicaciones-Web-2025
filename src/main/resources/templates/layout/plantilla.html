@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+
+<head th:fragment="head">
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>GymApp</title>
+
+    <!-- ✅ Bootstrap y FontAwesome desde WebJars -->
+    <link th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" rel="stylesheet"/>
+    <link th:href="@{/webjars/font-awesome/css/all.min.css}" rel="stylesheet"/>
+
+    <!-- ✅ CSS personalizado (opcional) -->
+    <link th:href="@{/css/styles.css}" rel="stylesheet"/>
+
+    <!-- ✅ JavaScript de Bootstrap y jQuery -->
+    <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+    <script th:src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>
+</head>
+
+<body>
+
+    <!-- ✅ NAVBAR (Encabezado) -->
+    <header th:fragment="header">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container">
+                <a class="navbar-brand" th:href="@{/}">GymApp</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav me-auto">
+                        <li class="nav-item"><a class="nav-link" th:href="@{/user/listado}">Usuarios</a></li>
+                        <li class="nav-item"><a class="nav-link" th:href="@{/clase/listado}">Clases</a></li>
+                        <li class="nav-item"><a class="nav-link" th:href="@{/membresia/listado}">Membresías</a></li>
+                    </ul>
+                    <ul class="navbar-nav">
+                        <!-- ✅ Mostrar solo si el usuario NO ha iniciado sesión -->
+                        <li class="nav-item" sec:authorize="isAnonymous()">
+                            <a class="nav-link btn btn-primary text-white" th:href="@{/login}">Iniciar Sesión</a>
+                        </li>
+                        <!-- ✅ Mostrar solo si el usuario ha iniciado sesión -->
+                        <li class="nav-item dropdown" sec:authorize="isAuthenticated()">
+                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                               data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="fas fa-user"></i> [[${#authentication.name}]]
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                                <li><a class="dropdown-item" th:href="@{/perfil}">Perfil</a></li>
+                                <li><a class="dropdown-item" th:href="@{/logout}">Cerrar Sesión</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- ✅ CONTENIDO DINÁMICO -->
+    <main class="container mt-4">
+        <th:block th:replace="~{::content}"></th:block>
+    </main>
+
+    <!-- ✅ FOOTER -->
+    <footer th:fragment="footer" class="bg-dark text-white text-center p-3 mt-4">
+        <p>&COPY; 2025 GymApp - Todos los derechos reservados</p>
+    </footer>
+
+</body>
+</html>
+
