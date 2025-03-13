@@ -6,11 +6,13 @@
 <head th:replace="~{layout/plantilla :: head}">
     <title>GymApp</title>
     <meta charset="UTF-8"/>
+    
 </head>
 
 <body>
     <header th:replace="~{layout/plantilla :: header}"/>
-    
+    <p th:if="${session.usuario != null}">Usuario actual: <span th:text="${session.usuario.name}"></span> - Rol: <span th:text="${session.usuario.role}"></span></p>
+
     <!-- Sección Principal de Bienvenida -->
     <section class="hero bg-dark text-white text-center py-5">
         <div class="container">

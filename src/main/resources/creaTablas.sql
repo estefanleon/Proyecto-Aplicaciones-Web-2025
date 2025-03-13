@@ -40,3 +40,37 @@ VALUES ('María González', 'Entrenamiento funcional', 8, '/images/entrenador2.j
 INSERT INTO entrenadores (nombre, especialidad, experiencia, imagen) 
 VALUES ('Juan Pérez', 'Crossfit y HIIT', 6, '/images/entrenador3.jpg');
 
+
+
+CREATE TABLE clases (
+    idClase BIGINT AUTO_INCREMENT PRIMARY KEY,
+    nombreClase VARCHAR(100) NOT NULL,
+    descripcionClase TEXT NOT NULL,
+    horarioClase VARCHAR(50) NOT NULL,
+    nombreEntrenador VARCHAR(100) NOT NULL, -- Guardamos el nombre del entrenador en vez del ID
+    imagenClase VARCHAR(255)
+);
+
+CREATE TABLE reservas (
+    idReserva BIGINT AUTO_INCREMENT PRIMARY KEY,
+    nombreUsuario VARCHAR(100) NOT NULL, -- Guardamos el nombre del usuario en vez del ID
+    nombreClase VARCHAR(100) NOT NULL, -- Guardamos el nombre de la clase en vez del ID
+    fechaReserva TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+
+
+-- Insertar clases
+INSERT INTO clases (nombreClase, descripcionClase, horarioClase, nombreEntrenador, imagenClase) 
+VALUES 
+('Aqua Box', 'Ejercicios de boxeo en piscina', 'Lunes 6:00 PM', 'Carlos Ramírez', '/images/aqua_box.jpg'),
+('Cross Training', 'Entrenamiento de alta intensidad', 'Martes 7:00 AM', 'María González', '/images/cross_training.jpg'),
+('Yoga Fit', 'Yoga con ejercicios funcionales', 'Miércoles 8:00 AM', 'Juan Pérez', '/images/yoga_fit.jpg'),
+('Baile Activo', 'Clases de baile fitness', 'Jueves 6:30 PM', 'Carlos Ramírez', '/images/baile_activo.jpg');
+
+-- Insertar reservas
+INSERT INTO reservas (nombreUsuario, nombreClase) 
+VALUES 
+('Pedro López', 'Cross Training'), 
+('Ana Martínez', 'Aqua Box'),
+('Luis Gómez', 'Yoga Fit');

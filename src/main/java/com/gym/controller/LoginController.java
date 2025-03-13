@@ -30,30 +30,27 @@ public class LoginController {
             HttpSession session,
             Model model) {
 
-        // Buscar usuario por email
-        var users = userService.getUsers();
-        User usuarioAutenticado = null;
+        // Buscar usuario por email y contraseña
+        User usuarioAutenticado = userService.getUsers().stream()
+                .filter(user -> user.getEmail().equals(email) && user.getPassword().equals(password))
+                .findFirst()
+                .orElse(null);
 
-        for (User user : users) {
-            if (user.getEmail().equals(email) && user.getPassword().equals(password)) {
-                usuarioAutenticado = user;
-                break;
-            }
-        }
+if (usuarioAutenticado != null) {
+    session.setAttribute("usuario", usuarioAutenticado); // ✅ Guardar usuario en sesión
+    System.out.println("Usuario autenticado: " + usuarioAutenticado.getRole()); // 🛠️ Debug
+    return "redirect:/"; // 🔄 Redirige al inicio
 
-        if (usuarioAutenticado != null) {
-            session.setAttribute("usuario", usuarioAutenticado); // Guardar usuario en sesión
-            return "redirect:/"; // Redirige al inicio
         } else {
-            model.addAttribute("error", "Credenciales incorrectas");
-            return "login"; // Vuelve a la página de login con error
+            model.addAttribute("error", "Credenciales incorrectas"); // ❌ Mostrar error
+            return "login"; // 🔄 Vuelve a login.html
         }
     }
 
     // 📌 Cerrar sesión
     @GetMapping("/logout")
     public String cerrarSesion(HttpSession session) {
-        session.invalidate(); // Elimina la sesión
-        return "redirect:/login"; // Redirige al login
+        session.invalidate(); // ❌ Elimina la sesión
+        return "redirect:/login"; // 🔄 Redirige al login
     }
 }
