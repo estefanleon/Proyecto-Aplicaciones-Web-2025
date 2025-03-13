@@ -1,29 +1,63 @@
 <!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 
-<html  
-    xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:th="http://www.thymeleaf.org"
-    xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6"
->
 <head th:replace="~{layout/plantilla :: head}">
     <title>GymApp</title>
     <meta charset="UTF-8"/>
 </head>
+
 <body>
-
     <header th:replace="~{layout/plantilla :: header}"/>
+    
+    <!-- Sección Principal de Bienvenida -->
+    <section class="hero bg-dark text-white text-center py-5">
+        <div class="container">
+            <h1 class="display-3 fw-bold">GOLD'S GYM COSTA RICA</h1>
+            <p class="lead">JUNTOS, EN TU SALUD, EN TU VIDA.</p>
+            <a href="#" class="btn btn-warning btn-lg fw-bold">ÚNETE A LA FAMILIA GOLD'S GYM</a>
+        </div>
+    </section>
 
-    <!-- Contenido principal -->
-    <div class="container text-center mt-5">
-        <h1 class="display-4">Bienvenido a GymApp</h1>
-        <p class="lead">Administra tus usuarios, clases y membresías de manera eficiente.</p>
-        
-        <a th:href="@{/user/listado}" class="btn btn-success btn-lg">Ver Usuarios</a>
-        <a th:href="@{/clase/listado}" class="btn btn-warning btn-lg">Ver Clases</a>
-        <a th:href="@{/membresia/listado}" class="btn btn-info btn-lg">Ver Membresías</a>
-    </div>
+    <!-- Sección de Membresías -->
+    <section class="container text-center py-5">
+        <h2 class="text-uppercase fw-bold">Membresía</h2>
+        <p class="fs-4 fw-bold text-warning">$75 + IVA</p>
+        <p>Conoce más sobre los diferentes planes y precios en Gold's Gym Costa Rica.</p>
+        <a href="#" class="btn btn-warning btn-lg">Conviértete en Miembro</a>
+    </section>
 
+    <!-- Sección de Servicios -->
+    <section class="bg-light py-5">
+        <div class="container">
+            <h2 class="text-uppercase text-center fw-bold">Servicios</h2>
+            <p class="text-center">Estamos contigo en tu progreso, contamos con personal altamente calificado para cuidarte y motivarte.</p>
+            <div class="row">
+                <div class="col-md-6">
+                    <img src="/images/gym-piscina.jpg" class="img-fluid rounded" alt="Piscina y vapor"/>
+                    <h4 class="text-center mt-2">Piscina + jacuzzi y cuarto de vapor</h4>
+                </div>
+                <div class="col-md-6">
+                    <img src="/images/gym-clases.jpg" class="img-fluid rounded" alt="Clases Grupales"/>
+                    <h4 class="text-center mt-2">Clases Grupales</h4>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Sección de Contacto -->
+    <section class="contacto text-center py-5 bg-dark text-white">
+        <div class="container">
+            <h2 class="text-uppercase fw-bold">Estemos en contacto</h2>
+            <p>Comunícate con nosotros en cualquiera de nuestras sedes</p>
+            <p><strong>Guayabos:</strong> 2271-0915 | <a href="#" class="text-warning">8787-0054</a></p>
+            <p><strong>Moravia:</strong> 2235-3660 | <a href="#" class="text-warning">8787-0056</a></p>
+            <p><strong>Irazú:</strong> 2220-4410 | <a href="#" class="text-warning">8868-8785</a></p>
+        </div>
+    </section>
+    
     <footer th:replace="~{layout/plantilla :: footer}"/>
-
 </body>
+
 </html>

@@ -4,29 +4,32 @@
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 
 <head th:fragment="head">
-    <meta charset="UTF-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>GymApp</title>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <!-- ✅ Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/fav/favicon-32x32.png"/>
 
     <!-- ✅ Bootstrap y FontAwesome desde WebJars -->
-    <link th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" rel="stylesheet"/>
-    <link th:href="@{/webjars/font-awesome/css/all.min.css}" rel="stylesheet"/>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.0/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{/webjars/font-awesome/6.4.2/css/all.min.css}"/>
 
-    <!-- ✅ CSS personalizado (opcional) -->
-    <link th:href="@{/css/styles.css}" rel="stylesheet"/>
+    <!-- ✅ CSS personalizado -->
+    <link rel="stylesheet" th:href="@{/css/styles.css}"/>
 
     <!-- ✅ JavaScript de Bootstrap y jQuery -->
-    <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
-    <script th:src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>
+    <script th:src="@{/webjars/jquery/3.6.0/jquery.min.js}"></script>
+    <script th:src="@{/webjars/bootstrap/5.3.0/js/bootstrap.bundle.min.js}"></script>
 </head>
 
 <body>
 
     <!-- ✅ NAVBAR (Encabezado) -->
-    <header th:fragment="header">
+    <header th:fragment="header" class="header">
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="container">
-                <a class="navbar-brand" th:href="@{/}">GymApp</a>
+                <a th:href="@{/}" class="navbar-brand">GymApp</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -37,15 +40,15 @@
                         <li class="nav-item"><a class="nav-link" th:href="@{/membresia/listado}">Membresías</a></li>
                     </ul>
                     <ul class="navbar-nav">
-                        <!-- ✅ Mostrar solo si el usuario NO ha iniciado sesión -->
+                        <!-- ✅ Mostrar botón de login solo si el usuario NO ha iniciado sesión -->
                         <li class="nav-item" sec:authorize="isAnonymous()">
                             <a class="nav-link btn btn-primary text-white" th:href="@{/login}">Iniciar Sesión</a>
                         </li>
-                        <!-- ✅ Mostrar solo si el usuario ha iniciado sesión -->
+                        <!-- ✅ Menú de usuario si ha iniciado sesión -->
                         <li class="nav-item dropdown" sec:authorize="isAuthenticated()">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                data-bs-toggle="dropdown" aria-expanded="false">
-                                <i class="fas fa-user"></i> [[${#authentication.name}]]
+                                <i class="fas fa-user"></i> <span th:text="${#authentication?.name}"></span>
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
                                 <li><a class="dropdown-item" th:href="@{/perfil}">Perfil</a></li>
@@ -64,10 +67,9 @@
     </main>
 
     <!-- ✅ FOOTER -->
-    <footer th:fragment="footer" class="bg-dark text-white text-center p-3 mt-4">
+    <footer th:fragment="footer" class="p-3 mt-4 bg-dark text-white text-center">
         <p>&COPY; 2025 GymApp - Todos los derechos reservados</p>
     </footer>
 
 </body>
 </html>
-
