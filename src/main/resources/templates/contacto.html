@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout/plantilla :: head}">
+    <title>Contacto - GymApp</title>
+    <meta charset="UTF-8"/>
+</head>
+<body>
+
+<header th:replace="~{layout/plantilla :: header}"/>
+
+<!-- 📌 Sección de Contacto -->
+<section class="contact-section py-5">
+    <div class="container text-center">
+        <h2 class="fw-bold">ESTEMOS EN CONTACTO</h2>
+        <div class="row mt-4">
+            <div class="col-md-6">
+                <h4>GUAYABOS:</h4>
+                <p>2271-0915 | <a href="tel:8787-0054">8787-0054</a></p>
+                <h4>MORAVIA:</h4>
+                <p>2235-3660 | <a href="tel:8787-0056">8787-0056</a></p>
+                <h4>IRAZÚ:</h4>
+                <p>2220-4410 | <a href="tel:8868-8785">8868-8785</a></p>
+            </div>
+            <div class="col-md-6">
+                <h4>Si querés unirte al team de Gold's:</h4>
+                <p><i class="fas fa-envelope"></i> fernanda@goldsgymcr.com</p>
+                <p><i class="fas fa-envelope"></i> marketing@goldsgymcr.com</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer th:replace="~{layout/plantilla :: footer}"/>
+
+</body>
+</html>

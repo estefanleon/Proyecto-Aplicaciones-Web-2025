@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="~{layout/plantilla :: head}">
+        <title>Matrícula - GymApp</title>
+        <meta charset="UTF-8"/>        
+    </head>
+    <body>
+        <header th:replace="~{layout/plantilla :: header}"/>
+
+        <!-- 📌 Sección de Portada -->
+        <section class="hero-section text-center text-white">
+            <div class="overlay"></div>
+            <div class="container">
+                <h2 class="fw-bold">¡ÚNETE A GYMAPP HOY!</h2>
+                <h1 class="display-3 fw-bold">MATRÍCULA</h1>
+            </div>
+        </section>
+
+        <!-- 📌 Información de Matrícula -->
+        <section class="container text-center my-5">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <h2 class="fw-bold">OPCIONES DE MEMBRESÍA</h2>
+                    <p>Elige el plan que más se adapte a ti. Ofrecemos opciones flexibles para todas las necesidades.</p>
+                </div>
+                <div class="col-md-6">
+                    <img src="/img/membresia.jpg" class="img-fluid rounded" alt="Membresía"/>
+                </div>
+            </div>
+        </section>
+
+        <!-- 📌 Tipos de Membresía -->
+        <section class="container text-center my-5">
+            <h2 class="fw-bold">NUESTROS PLANES</h2>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card p-3">
+                        <h3>Mensual</h3>
+                        <p>$40 + IVA</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card p-3">
+                        <h3>Trimestral</h3>
+                        <p>$100 + IVA</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card p-3">
+                        <h3>Anual</h3>
+                        <p>$350 + IVA</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer th:replace="~{layout/plantilla :: footer}"/>
+    </body>
+</html>
+

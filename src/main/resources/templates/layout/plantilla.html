@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+      xmlns:th="http://www.thymeleaf.org">
 
 <head th:fragment="head">
     <title>GymApp</title>
@@ -37,25 +36,28 @@
                     <ul class="navbar-nav me-auto">
                         <li class="nav-item"><a class="nav-link" th:href="@{/user/listado}">Usuarios</a></li>
                         <li class="nav-item"><a class="nav-link" th:href="@{/clase/listado}">Clases</a></li>
-                        <li class="nav-item"><a class="nav-link" th:href="@{/membresia/listado}">Membresías</a></li>
+                        <li class="nav-item px-2"><a class="nav-link" th:href="@{/matricula}">Matrícula</a></li>
+                        <li class="nav-item px-2"><a class="nav-link" th:href="@{/contacto}">Contacto</a></li>
                     </ul>
+
                     <ul class="navbar-nav">
-                        <!-- ✅ Mostrar botón de login solo si el usuario NO ha iniciado sesión -->
-                        <li class="nav-item" sec:authorize="isAnonymous()">
+                        <!-- ✅ Mostrar botón de login solo si NO hay usuario autenticado -->
+                        <li class="nav-item" th:if="${session.usuario == null}">
                             <a class="nav-link btn btn-primary text-white" th:href="@{/login}">Iniciar Sesión</a>
                         </li>
-                        <!-- ✅ Menú de usuario si ha iniciado sesión -->
-                        <li class="nav-item dropdown" sec:authorize="isAuthenticated()">
+
+                        <!-- ✅ Mostrar el nombre del usuario si está autenticado -->
+                        <li class="nav-item dropdown" th:if="${session.usuario != null}">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                data-bs-toggle="dropdown" aria-expanded="false">
-                                <i class="fas fa-user"></i> <span th:text="${#authentication?.name}"></span>
+                                <i class="fas fa-user"></i> <span th:text="${session.usuario.name}"></span>
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
-                                <li><a class="dropdown-item" th:href="@{/perfil}">Perfil</a></li>
                                 <li><a class="dropdown-item" th:href="@{/logout}">Cerrar Sesión</a></li>
                             </ul>
                         </li>
                     </ul>
+
                 </div>
             </div>
         </nav>

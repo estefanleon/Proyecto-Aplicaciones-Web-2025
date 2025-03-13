@@ -98,3 +98,51 @@ input:focus, select:focus, textarea:focus {
     border-color: #007bff !important;
     box-shadow: 0px 0px 8px rgba(0, 123, 255, 0.5) !important;
 }
+/* ✅ Estilo para la sección de portada */
+.hero-section {
+    background: url('/images/clases-header.jpg') no-repeat center center/cover;
+    position: relative;
+    padding: 150px 0;
+}
+.hero-section .overlay {
+    background: rgba(255, 200, 0, 0.5);
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+}
+.hero-section h2, .hero-section h1 {
+    position: relative;
+    z-index: 2;
+}
+
+/* ✅ Estilo para las imágenes de clases */
+.class-box {
+    position: relative;
+    overflow: hidden;
+}
+.class-box img {
+    width: 100%;
+    height: auto;
+}
+.class-overlay {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    background: rgba(0, 0, 0, 0.8);
+    padding: 10px;
+    color: white;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+/* ✅ Sección Gold's Elite */
+.elite-section {
+    background: url('/images/elite-bg.jpg') no-repeat center center/cover;
+    position: relative;
+    padding: 80px 0;
+}
+.elite-info {
+    background: rgba(0, 0, 0, 0.8);
+    padding: 15px;
+    border-radius: 5px;
+}
