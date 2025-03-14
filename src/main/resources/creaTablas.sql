@@ -32,13 +32,13 @@ CREATE TABLE entrenadores (
 
 
 INSERT INTO entrenadores (nombre, especialidad, experiencia, imagen) 
-VALUES ('Carlos Ramírez', 'Musculación y fuerza', 10, '/images/entrenador1.jpg');
+VALUES ('Carlos Ramírez', 'Musculación y fuerza', 10, 'https://fivestarsfitness.com/wp-content/uploads/Preguntas-que-debe-hacer-un-entrenador-personal.jpg');
 
 INSERT INTO entrenadores (nombre, especialidad, experiencia, imagen) 
-VALUES ('María González', 'Entrenamiento funcional', 8, '/images/entrenador2.jpg');
+VALUES ('María González', 'Entrenamiento funcional', 8, 'https://c.superprof.com/i/a/11785229/6158453/600/20230517022037/entrenadora-personal-ayudo-cambiar-cuerpo-mente-haciendo-del-ejercicio-una-forma-vida.jpg');
 
 INSERT INTO entrenadores (nombre, especialidad, experiencia, imagen) 
-VALUES ('Juan Pérez', 'Crossfit y HIIT', 6, '/images/entrenador3.jpg');
+VALUES ('Juan Pérez', 'Crossfit y HIIT', 6, 'https://www.clikisalud.net/wp-content/uploads/2019/08/consejos-top-entrenadores-personales-hacer-ejercicio.jpg');
 
 
 
