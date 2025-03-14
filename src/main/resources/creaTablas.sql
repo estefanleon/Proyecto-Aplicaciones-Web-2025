@@ -51,6 +51,9 @@ CREATE TABLE clases (
     imagenClase VARCHAR(255)
 );
 
+ALTER TABLE clases ADD estadoReserva ENUM('DISPONIBLE', 'RESERVADA') NOT NULL DEFAULT 'DISPONIBLE';
+
+
 CREATE TABLE reservas (
     idReserva BIGINT AUTO_INCREMENT PRIMARY KEY,
     nombreUsuario VARCHAR(100) NOT NULL, -- Guardamos el nombre del usuario en vez del ID

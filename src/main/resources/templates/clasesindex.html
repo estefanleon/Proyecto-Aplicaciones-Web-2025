@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout/plantilla :: head}">
+    <title>Clases - GymApp</title>
+    <meta charset="UTF-8"/>
+</head>
+<body>
+
+<header th:replace="~{layout/plantilla :: header}"/>
+
+<!-- 📌 Sección de Clases -->
+<section class="classes-section py-5">
+    <div class="container text-center">
+        <h2 class="fw-bold">DESCUBRE NUESTRAS CLASES</h2>
+        <p class="mt-3">Encuentra la clase perfecta para ti y alcanza tus objetivos de entrenamiento.</p>
+        
+        <div class="row mt-4">
+            <div class="col-md-4">
+                <img src="/images/cross-training.jpg" class="img-fluid" alt="Cross Training"/>
+                <h4 class="mt-3">CROSS TRAINING</h4>
+                <p>Entrenamiento funcional para mejorar resistencia, fuerza y coordinación.</p>
+            </div>
+            <div class="col-md-4">
+                <img src="/images/aqua-box.jpg" class="img-fluid" alt="Aqua Box"/>
+                <h4 class="mt-3">AQUA BOX</h4>
+                <p>Combina boxeo y entrenamiento en el agua para mayor resistencia.</p>
+            </div>
+            <div class="col-md-4">
+                <img src="/images/baile.jpg" class="img-fluid" alt="Baile"/>
+                <h4 class="mt-3">BAILE</h4>
+                <p>Diviértete y mantente en forma con nuestras clases de baile.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer th:replace="~{layout/plantilla :: footer}"/>
+
+</body>
+</html>
