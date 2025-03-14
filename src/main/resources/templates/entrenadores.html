@@ -16,13 +16,35 @@
         <p class="text-center">Profesionales altamente capacitados para ayudarte a alcanzar tus objetivos.</p>
         
         <div class="row">
-            <div class="col-md-4 mb-4" th:each="entrenador : ${entrenadores}">
+            <div class="col-md-4 mb-4">
                 <div class="card text-center">
-                    <img th:src="@{${entrenador.imagen}}" class="card-img-top" alt="Entrenador">
+                    <img src="https://fivestarsfitness.com/wp-content/uploads/Preguntas-que-debe-hacer-un-entrenador-personal.jpg" class="card-img-top" alt="Entrenador 1">
                     <div class="card-body">
-                        <h5 class="card-title" th:text="${entrenador.nombre}"></h5>
-                        <p class="card-text" th:text="${entrenador.especialidad}"></p>
-                        <p><strong>Experiencia:</strong> <span th:text="${entrenador.experiencia}"></span> años</p>
+                        <h5 class="card-title">Carlos Ramírez</h5>
+                        <p class="card-text">Especialista en musculación y acondicionamiento físico</p>
+                        <p><strong>Experiencia:</strong> 10 años</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-4 mb-4">
+                <div class="card text-center">
+                    <img src="https://c.superprof.com/i/a/11785229/6158453/600/20230517022037/entrenadora-personal-ayudo-cambiar-cuerpo-mente-haciendo-del-ejercicio-una-forma-vida.jpg" class="card-img-top" alt="Entrenadora 2">
+                    <div class="card-body">
+                        <h5 class="card-title">Laura Fernández</h5>
+                        <p class="card-text">Especialista en entrenamiento funcional y bienestar</p>
+                        <p><strong>Experiencia:</strong> 8 años</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-4 mb-4">
+                <div class="card text-center">
+                    <img src="https://www.clikisalud.net/wp-content/uploads/2019/08/consejos-top-entrenadores-personales-hacer-ejercicio.jpg" class="card-img-top" alt="Entrenador 3">
+                    <div class="card-body">
+                        <h5 class="card-title">Javier Solís</h5>
+                        <p class="card-text">Especialista en entrenamiento de alto rendimiento</p>
+                        <p><strong>Experiencia:</strong> 12 años</p>
                     </div>
                 </div>
             </div>
