@@ -77,3 +77,25 @@ VALUES
 ('Pedro López', 'Cross Training'), 
 ('Ana Martínez', 'Aqua Box'),
 ('Luis Gómez', 'Yoga Fit');
+
+
+
+CREATE TABLE IF NOT EXISTS membresias (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    tipo VARCHAR(50) NOT NULL,
+    precio DOUBLE NOT NULL,
+    duracionMeses INT NOT NULL
+);
+
+INSERT INTO membresias (tipo, precio, duracionMeses) VALUES 
+('Mensual', 40.0, 1),
+('Trimestral', 100.0, 3),
+('Anual', 350.0, 12);
+
+
+
+SELECT * FROM gym_db.users;
+
+ALTER TABLE users ADD COLUMN membresia_id BIGINT;
+ALTER TABLE users ADD CONSTRAINT fk_membresia 
+FOREIGN KEY (membresia_id) REFERENCES membresias(id);

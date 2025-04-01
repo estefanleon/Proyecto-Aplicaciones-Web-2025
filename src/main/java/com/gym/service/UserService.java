@@ -22,6 +22,9 @@ public class UserService {
     }
 
     public void save(User user) {
+        if (userRepository.findByEmail(user.getEmail()).isPresent()) {
+            throw new IllegalArgumentException("El correo ya está registrado");
+        }
         userRepository.save(user);
     }
 

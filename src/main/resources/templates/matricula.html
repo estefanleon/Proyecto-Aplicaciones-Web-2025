@@ -1,60 +1,109 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
-    <head th:replace="~{layout/plantilla :: head}">
-        <title>Matrícula - GymApp</title>
-        <meta charset="UTF-8"/>        
-    </head>
-    <body>
-        <header th:replace="~{layout/plantilla :: header}"/>
+<head th:replace="~{layout/plantilla :: head}">
+    <title>Matrícula - GymApp</title>
+    <meta charset="UTF-8"/>        
+</head>
+<body>
+    <header th:replace="~{layout/plantilla :: header}"/>
 
-        <!-- 📌 Sección de Portada -->
-        <section class="hero-section text-center text-white">
-            <div class="overlay"></div>
-            <div class="container">
-                <h2 class="fw-bold">¡ÚNETE A GYMAPP HOY!</h2>
-                <h1 class="display-3 fw-bold">MATRÍCULA</h1>
+    <!-- 📌 Sección de Portada -->
+    <section class="hero-section text-center text-white">
+        <div class="overlay"></div>
+        <div class="container">
+            <h2 class="fw-bold">¡ÚNETE A GYMAPP HOY!</h2>
+            <h1 class="display-3 fw-bold">MATRÍCULA</h1>
+        </div>
+    </section>
+
+    <!-- 📌 Información de Matrícula -->
+    <section class="container text-center my-5">
+        <div class="row align-items-center">
+            <div class="col-md-6">
+                <h2 class="fw-bold">OPCIONES DE MEMBRESÍA</h2>
+                <p>Elige el plan que más se adapte a ti. Ofrecemos opciones flexibles para todas las necesidades.</p>
             </div>
-        </section>
-
-        <!-- 📌 Información de Matrícula -->
-        <section class="container text-center my-5">
-            <div class="row align-items-center">
-                <div class="col-md-6">
-                    <h2 class="fw-bold">OPCIONES DE MEMBRESÍA</h2>
-                    <p>Elige el plan que más se adapte a ti. Ofrecemos opciones flexibles para todas las necesidades.</p>
-                </div>
-                <div class="col-md-6">
-                    <img src="https://tecnosoluciones.com/wp-content/uploads/2023/08/membresias-vs-suscripciones.png" class="img-fluid rounded" alt="Membresía"/>
-                </div>
+            <div class="col-md-6">
+                <img src="https://tecnosoluciones.com/wp-content/uploads/2023/08/membresias-vs-suscripciones.png" class="img-fluid rounded" alt="Membresía"/>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- 📌 Tipos de Membresía -->
-        <section class="container text-center my-5">
-            <h2 class="fw-bold">NUESTROS PLANES</h2>
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="card p-3">
-                        <h3>Mensual</h3>
-                        <p>$40 + IVA</p>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card p-3">
-                        <h3>Trimestral</h3>
-                        <p>$100 + IVA</p>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card p-3">
-                        <h3>Anual</h3>
-                        <p>$350 + IVA</p>
-                    </div>
+    <!-- 📌 Tipos de Membresía -->
+    <section class="container text-center my-5">
+        <h2 class="fw-bold">NUESTROS PLANES</h2>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card p-3">
+                    <h3>Mensual</h3>
+                    <p>$40 + IVA</p>
                 </div>
             </div>
-        </section>
+            <div class="col-md-4">
+                <div class="card p-3">
+                    <h3>Trimestral</h3>
+                    <p>$100 + IVA</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card p-3">
+                    <h3>Anual</h3>
+                    <p>$350 + IVA</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-        <footer th:replace="~{layout/plantilla :: footer}"/>
-    </body>
+    <!-- 📌 Formulario de Registro de Usuario -->
+    <section class="container my-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <h2 class="fw-bold text-center">Formulario de Registro</h2>
+
+                <!-- ⚠️ Mensaje de error si el correo ya está registrado -->
+                <div th:if="${error}" class="alert alert-danger" role="alert" th:text="${error}"></div>
+
+                <form th:action="@{/matricula}" th:object="${user}" method="post">
+
+                    <!-- Nombre -->
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Nombre</label>
+                        <input type="text" th:field="*{name}" class="form-control" required="required" />
+                    </div>
+
+                    <!-- Correo -->
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Correo Electrónico</label>
+                        <input type="email" th:field="*{email}" class="form-control" required="required" />
+                    </div>
+
+                    <!-- Contraseña -->
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Contraseña</label>
+                        <input type="password" th:field="*{password}" class="form-control" required="required" />
+                    </div>
+
+                    <!-- Membresía -->
+                    <div class="mb-3">
+                        <label for="membresia" class="form-label">Selecciona una Membresía</label>
+                        <select th:field="*{membresia}" class="form-select" required="required">
+                            <option value="">-- Selecciona una opción --</option>
+                            <option th:each="m : ${membresias}" 
+                                    th:value="${m.id}" 
+                                    th:text="${m.tipo + ' - $' + m.precio}"></option>
+                        </select>
+                    </div>
+
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-primary">Registrarse</button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer th:replace="~{layout/plantilla :: footer}"/>
+</body>
 </html>

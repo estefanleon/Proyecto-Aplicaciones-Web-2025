@@ -13,12 +13,18 @@ public class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String name;
     private String email;
     private String password;
 
     @Enumerated(EnumType.STRING)
     private Role role = Role.USER;
+
+    // 📌 Relación con la membresía
+    @ManyToOne
+    @JoinColumn(name = "membresia_id")
+    private Membresia membresia;
 
     @Column(name = "created_at", updatable = false, insertable = false)
     private String createdAt;
@@ -66,6 +72,14 @@ public class User implements Serializable {
 
     public void setRole(Role role) {
         this.role = role;
+    }
+
+    public Membresia getMembresia() {
+        return membresia;
+    }
+
+    public void setMembresia(Membresia membresia) {
+        this.membresia = membresia;
     }
 
     public String getCreatedAt() {
