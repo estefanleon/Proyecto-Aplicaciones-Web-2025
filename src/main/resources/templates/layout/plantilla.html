@@ -50,11 +50,21 @@
     <li class="nav-item px-2" th:if="${session.usuario != null and session.usuario.role.name() == 'USER'}">
         <a class="nav-link" th:href="@{/reserva}">Reservar Clase</a>
     </li>
+    
     <li class="nav-item px-2" th:if="${session.usuario != null and session.usuario.role.name() == 'USER'}">
         <a class="nav-link" th:href="@{/acceso}">Acceder Instalaciones</a>
     </li>
 
 
+        <li class="nav-item px-2" th:if="${session.usuario != null and session.usuario.role.name() == 'USER'}">
+        <a class="nav-link" th:href="@{/perfil}">Perfil</a>
+    </li>
+    
+    <li class="nav-item">
+    <a class="nav-link" th:href="@{/clases}">Horarios Clases</a>
+</li>
+
+    
     <li class="nav-item px-2"><a class="nav-link" th:href="@{/clasesindex}">Clases</a></li>
 
     <li class="nav-item px-2"><a class="nav-link" th:href="@{/matricula}">Matrícula</a></li>

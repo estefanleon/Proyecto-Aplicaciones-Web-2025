@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+
+<head th:replace="~{layout/plantilla :: head}">
+    <title>Clases - GymApp</title>
+</head>
+<body>
+<header th:replace="~{layout/plantilla :: header}"/>
+
+<section class="container my-5">
+    <h2 class="text-center fw-bold">Clases Disponibles</h2>
+
+    <!-- Mensaje si no hay clases -->
+    <div class="row mt-4" th:if="${#lists.isEmpty(clases)}">
+        <p class="text-center">No hay clases registradas.</p>
+    </div>
+
+    <!-- Tarjetas de clases -->
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 mt-3" th:if="${not #lists.isEmpty(clases)}">
+        <div class="col" th:each="clase : ${clases}">
+            <div class="card h-100">
+                <img th:src="${clase.imagen}" class="card-img-top" alt="Imagen de clase"/>
+                <div class="card-body">
+                    <h5 class="card-title" th:text="${clase.nombre}">Nombre</h5>
+                    <p class="card-text" th:text="${clase.descripcion}">Descripción</p>
+                    <p class="card-text"><strong>Horario:</strong> <span th:text="${clase.horario}"></span></p>
+                    <p class="card-text"><strong>Entrenador:</strong> <span th:text="${clase.entrenador}"></span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer th:replace="~{layout/plantilla :: footer}"/>
+</body>
+</html>

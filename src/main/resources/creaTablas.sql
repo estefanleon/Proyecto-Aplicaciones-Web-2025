@@ -99,3 +99,45 @@ SELECT * FROM gym_db.users;
 ALTER TABLE users ADD COLUMN membresia_id BIGINT;
 ALTER TABLE users ADD CONSTRAINT fk_membresia 
 FOREIGN KEY (membresia_id) REFERENCES membresias(id);
+
+
+
+
+ALTER TABLE clases DROP COLUMN nombre_clase;
+ALTER TABLE clases DROP COLUMN descripcion_clase;
+ALTER TABLE clases DROP COLUMN horario_clase;
+ALTER TABLE clases DROP COLUMN nombre_entrenador;
+ALTER TABLE clases DROP COLUMN imagen_clase;
+ALTER TABLE clases DROP COLUMN estado_reserva;
+
+
+
+
+INSERT INTO clases 
+(nombreClase, descripcionClase, horarioClase, nombreEntrenador, imagenClase, estadoReserva) 
+VALUES
+(
+  'Cross Training', 
+  'Entrenamiento funcional para mejorar resistencia, fuerza y coordinación.', 
+  'Lunes y Miércoles - 8am', 
+  'Mario Herrera', 
+  'https://images.contentstack.io/v3/assets/blt45c082eaf9747747/blt38b3a2af80dd53fe/5de0b92485f2fe640c6fa50b/Benefits_of_Cross_Training_1_copy.JPG?width=1015&auto=webp&format=pjpg&quality=76', 
+  'DISPONIBLE'
+),
+(
+  'Aqua Box', 
+  'Combina boxeo y entrenamiento en el agua para mayor resistencia.', 
+  'Martes y Jueves - 5pm', 
+  'Sofía Pérez', 
+  'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQZJbl5zlyOwR23_3uFdjGHLA_ayXPbO8eb5A&s', 
+  'DISPONIBLE'
+),
+(
+  'Baile', 
+  'Diviértete y mantente en forma con nuestras clases de baile.', 
+  'Viernes - 6pm', 
+  'Ana Torres', 
+  'https://escueladfitness.com/wp-content/uploads/2022/12/gente-divirtiendose-clase-zumba_23-2149074860.jpg.webp', 
+  'DISPONIBLE'
+);
+

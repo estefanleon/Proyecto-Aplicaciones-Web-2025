@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout/plantilla :: head}">
+    <title>Mi Perfil - GymApp</title>
+</head>
+<body>
+    <header th:replace="~{layout/plantilla :: header}"/>
+
+    <section class="container mt-5">
+        <h2 class="text-center">Mi Perfil</h2>
+
+        <div class="card mt-4">
+            <div class="card-body">
+                <h5 class="card-title">Datos del Usuario</h5>
+                <p><strong>Nombre:</strong> <span th:text="${usuario.name}"></span></p>
+                <p><strong>Correo:</strong> <span th:text="${usuario.email}"></span></p>
+                <p><strong>Rol:</strong> <span th:text="${usuario.role}"></span></p>
+
+                <div th:if="${usuario.membresia != null}">
+                    <h5 class="mt-4">Membresía</h5>
+                    <p><strong>Tipo:</strong> <span th:text="${usuario.membresia.tipo}"></span></p>
+                    <p><strong>Precio:</strong> $<span th:text="${usuario.membresia.precio}"></span></p>
+                    <p><strong>Duración:</strong> <span th:text="${usuario.membresia.duracionMeses}"></span> meses</p>
+                </div>
+
+                <div th:if="${usuario.membresia == null}" class="alert alert-warning">
+                    No tienes una membresía asignada aún.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer th:replace="~{layout/plantilla :: footer}"/>
+</body>
+</html>
