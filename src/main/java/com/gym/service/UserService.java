@@ -21,11 +21,12 @@ public class UserService {
         return userRepository.findById(id).orElse(null);
     }
 
+    public User getByEmail(String email) {
+        return userRepository.findByEmail(email).orElse(null);
+    }
+
     public void save(User user) {
-        if (userRepository.findByEmail(user.getEmail()).isPresent()) {
-            throw new IllegalArgumentException("El correo ya está registrado");
-        }
-        userRepository.save(user);
+        userRepository.save(user); // ya no lanza error, porque ahora es asignación, no creación
     }
 
     public void deleteUser(Long id) {

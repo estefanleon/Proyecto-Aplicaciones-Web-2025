@@ -16,4 +16,8 @@ public class MembresiaService {
     public List<Membresia> getMembresias() {
         return membresiaRepository.findAll();
     }
+
+    public Membresia getMembresiaById(Long id) {
+        return membresiaRepository.findById(id).orElse(null);
+    }
 }

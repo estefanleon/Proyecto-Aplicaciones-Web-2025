@@ -1,5 +1,6 @@
 package com.gym.controller;
 
+import com.gym.domain.Membresia;
 import com.gym.domain.User;
 import com.gym.service.MembresiaService;
 import com.gym.service.UserService;
@@ -17,23 +18,32 @@ public class MatriculaController {
     @Autowired
     private MembresiaService membresiaService;
 
+    // Mostrar formulario de matrícula (para ADMIN)
     @GetMapping("/matricula")
     public String mostrarMatricula(Model model) {
-        model.addAttribute("user", new User());
+        model.addAttribute("correo", "");
         model.addAttribute("membresias", membresiaService.getMembresias());
         return "matricula";
     }
 
+    // Procesar la asignación de membresía
     @PostMapping("/matricula")
-    public String registrarUsuario(@ModelAttribute("user") User user, Model model) {
-        try {
-            userService.save(user);
-            return "redirect:/login";
-        } catch (IllegalArgumentException e) {
-            model.addAttribute("user", user);
-            model.addAttribute("membresias", membresiaService.getMembresias());
-            model.addAttribute("error", e.getMessage());
-            return "matricula";
+    public String asignarMembresia(@RequestParam("correo") String correo,
+                                   @RequestParam("membresiaId") Long membresiaId,
+                                   Model model) {
+        User usuario = userService.getByEmail(correo);
+        if (usuario == null) {
+            model.addAttribute("error", "El correo no está registrado.");
+        } else {
+            Membresia membresia = membresiaService.getMembresiaById(membresiaId);
+            usuario.setMembresia(membresia);
+            userService.save(usuario);
+            model.addAttribute("mensaje", "Membresía asignada correctamente a " + usuario.getName());
         }
+
+        // Recargar datos para el formulario
+        model.addAttribute("correo", correo);
+        model.addAttribute("membresias", membresiaService.getMembresias());
+        return "matricula";
     }
 }
