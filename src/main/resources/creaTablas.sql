@@ -138,3 +138,10 @@ VALUES
 ALTER TABLE reservas ADD COLUMN idUsuario BIGINT;
 ALTER TABLE reservas DROP COLUMN correoUsuario;
 ALTER TABLE clases DROP COLUMN estadoReserva;
+
+
+INSERT INTO sesion_entrenamiento (descripcion, fecha, usuario_id)
+VALUES 
+('Entrenamiento de pierna', '2025-03-20', 1),
+('Cardio intenso', '2025-03-25', 1),
+('Entrenamiento funcional', '2025-04-01', 1);

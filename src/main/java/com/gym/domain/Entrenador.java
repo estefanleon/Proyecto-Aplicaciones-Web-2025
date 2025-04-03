@@ -5,12 +5,17 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "entrenadores")
+@Table(name = "entrenadores") // ✅ Mapeo correcto a la tabla real
 public class Entrenador {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    private String nombre;
+    private String especialidad;
+    private String experiencia;
+    private String imagen;
 
     public Long getId() {
         return id;
@@ -36,11 +41,11 @@ public class Entrenador {
         this.especialidad = especialidad;
     }
 
-    public int getExperiencia() {
+    public String getExperiencia() {
         return experiencia;
     }
 
-    public void setExperiencia(int experiencia) {
+    public void setExperiencia(String experiencia) {
         this.experiencia = experiencia;
     }
 
@@ -52,8 +57,5 @@ public class Entrenador {
         this.imagen = imagen;
     }
     
-    private String nombre;
-    private String especialidad;
-    private int experiencia;
-    private String imagen;
+    
 }

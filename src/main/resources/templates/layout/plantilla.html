@@ -47,11 +47,29 @@
     <a class="nav-link" th:href="@{/user/listado}">Usuarios</a>
 </li>
 
+    
+        <li class="nav-item" th:if="${session.usuario != null and session.usuario.role.name() == 'ADMIN'}">
+    <a class="nav-link" th:href="@{/entrenador/listado}">Entrenadores</a>
+</li>
+    
+    <li class="nav-item" th:if="${session.usuario != null and session.usuario.role.name() == 'ADMIN'}">
+    <a class="nav-link" th:href="@{/admin/clases/listado}">Clases</a>
+</li>
+
+    
+    
     <li class="nav-item px-2" th:if="${session.usuario != null and session.usuario.role.name() == 'USER'}">
         <a class="nav-link" th:href="@{/acceso}">Acceder Instalaciones</a>
     </li>
 
 
+    
+        <li class="nav-item px-2" th:if="${session.usuario != null and session.usuario.role.name() == 'USER'}">
+        <a class="nav-link" th:href="@{/historial}">Historial</a>
+    </li>
+
+    
+    
         <li class="nav-item px-2" th:if="${session.usuario != null and session.usuario.role.name() == 'USER'}">
         <a class="nav-link" th:href="@{/perfil}">Perfil</a>
     </li>
@@ -65,7 +83,7 @@
 
     <li class="nav-item px-2"><a class="nav-link" th:href="@{/matricula}">Matrícula</a></li>
     <li class="nav-item px-2"><a class="nav-link" th:href="@{/contacto}">Contacto</a></li>
-    <li class="nav-item px-2"><a class="nav-link" th:href="@{/entrenadores}">Entrenadores</a></li>
+    <li class="nav-item px-2"><a class="nav-link" th:href="@{/EntrenadorIndex}">Entrenadores</a></li>
     <li class="nav-item px-2"><a class="nav-link" th:href="@{/blog}">Blog</a></li>
     
     

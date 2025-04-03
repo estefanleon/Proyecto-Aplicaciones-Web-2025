@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{layout/plantilla :: head}">
+    <title>Clases</title>
+    <meta charset="UTF-8"/>        
+</head>
+
+<body>
+
+<!-- Botón para agregar clase -->
+<section th:fragment="btnAgregar" class="py-4 mb-4 bg-light">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">   
+                <button type="button" class="btn btn-primary btn-block" 
+                        data-bs-toggle="modal" data-bs-target="#agregarClase">
+                    <i class="fas fa-plus"></i> Agregar Clase
+                </button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Modal para agregar clase -->
+<section th:fragment="agregarClase">
+    <div id="agregarClase" class="modal fade" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content">
+                <div class="modal-header bg-info text-white">
+                    <h5 class="modal-title">Agregar Clase</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div> 
+                <form th:action="@{/admin/clases/guardar}" th:object="${clase}" method="POST" class="was-validated">
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label for="nombre">Nombre</label>
+                            <input type="text" class="form-control" th:field="*{nombre}" required />
+                        </div>
+                        <div class="mb-3">
+                            <label for="descripcion">Descripción</label>
+                            <textarea class="form-control" th:field="*{descripcion}" required></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="horario">Horario</label>
+                            <input type="text" class="form-control" th:field="*{horario}" required />
+                        </div>
+                        <div class="mb-3">
+                            <label for="entrenador">Entrenador</label>
+                            <input type="text" class="form-control" th:field="*{entrenador}" required />
+                        </div>
+                        <div class="mb-3">
+                            <label for="imagen">URL de Imagen</label>
+                            <input type="text" class="form-control" th:field="*{imagen}" />
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-primary" type="submit">Guardar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Listado de clases -->
+<section th:fragment="listado" class="p-3">
+    <div class="row p-3">
+        <div class="col-md-9">
+            <div class="card p-2">
+                <div class="card-header">
+                    <h4>Listado de Clases</h4>
+                </div>
+                <div class="card-body">
+                    <div th:if="${clases != null and !clases.empty}">
+                        <table class="table table-dark table-striped table-hover">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Nombre</th>
+                                    <th>Entrenador</th>
+                                    <th>Horario</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr th:each="c : ${clases}">
+                                    <td>[[${c.id}]]</td>
+                                    <td>[[${c.nombre}]]</td>
+                                    <td>[[${c.entrenador}]]</td>
+                                    <td>[[${c.horario}]]</td>
+                                    <td>
+                                        <a class="btn btn-danger" th:href="@{'/admin/clases/eliminar/' + ${c.id}}">
+                                            <i class="fas fa-trash"></i> Eliminar
+                                        </a>
+                                        <a class="btn btn-success" th:href="@{'/admin/clases/modificar/' + ${c.id}}">
+                                            <i class="fas fa-pencil-alt"></i> Editar
+                                        </a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="text-center p-2" th:if="${clases == null or clases.empty}">
+                        <span>No hay clases registradas.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card text-center bg-success text-white mb-3">
+                <div class="card-body">
+                    <h3>Total</h3>
+                    <h4 class="fs-2"><i class="fas fa-dumbbell"></i> [[${totalClases}]]</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+</body>
+</html>

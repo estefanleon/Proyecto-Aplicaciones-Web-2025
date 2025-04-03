@@ -15,15 +15,16 @@
 </div>
 
 <section class="container my-5">
-    <h2 class="text-center fw-bold">Clases Disponibles</h2>
+    <h2 class="text-center fw-bold mb-4">Clases Disponibles</h2>
 
-    <div class="row mt-4" th:if="${#lists.isEmpty(clases)}">
+    <div th:if="${#lists.isEmpty(clases)}">
         <p class="text-center">No hay clases disponibles por ahora.</p>
     </div>
 
-    <div class="row" th:each="clase : ${clases}">
-        <div class="col-md-4 mb-4">
-            <div class="card h-100">
+    <!-- ✅ Una sola fila con múltiples columnas (3 por fila) -->
+    <div class="row g-4">
+        <div class="col-md-4" th:each="clase : ${clases}">
+            <div class="card h-100 shadow">
                 <img th:src="${clase.imagen}" class="card-img-top" alt="Imagen de la clase" />
                 <div class="card-body">
                     <h5 class="card-title" th:text="${clase.nombre}">Nombre</h5>
@@ -51,7 +52,6 @@
                     <div th:if="${session.usuario == null}">
                         <a href="/login" class="btn btn-warning w-100">Inicia sesión para reservar</a>
                     </div>
-
                 </div>
             </div>
         </div>

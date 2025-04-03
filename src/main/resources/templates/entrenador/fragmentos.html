@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Fragmentos Entrenador</title>
+</head>
+<body>
+
+<!-- ✅ Botón para agregar -->
+<section th:fragment="btnAgregar" class="py-4 mb-4 bg-light">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                <button type="button" class="btn btn-primary btn-block"
+                        data-bs-toggle="modal" data-bs-target="#agregarEntrenador">
+                    <i class="fas fa-plus"></i> Agregar Entrenador
+                </button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ✅ Modal para agregar entrenador -->
+<section th:fragment="agregarEntrenador">
+    <div id="agregarEntrenador" class="modal fade" tabindex="-1"
+         aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content">
+                <div class="modal-header bg-info text-white">
+                    <h5 class="modal-title">Agregar Entrenador</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
+                </div>
+                <form th:action="@{/entrenador/guardar}" th:object="${entrenador}" method="POST" class="was-validated">
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label for="nombre">Nombre</label>
+                            <input type="text" class="form-control" th:field="*{nombre}" required/>
+                        </div>
+                        <div class="mb-3">
+                            <label for="especialidad">Especialidad</label>
+                            <input type="text" class="form-control" th:field="*{especialidad}" required/>
+                        </div>
+                        <div class="mb-3">
+                            <label for="experiencia">Años de experiencia</label>
+                            <input type="number" class="form-control" th:field="*{experiencia}" required min="0"/>
+                        </div>
+                        <div class="mb-3">
+                            <label for="imagen">Ruta Imagen</label>
+                            <input type="text" class="form-control" th:field="*{imagen}" placeholder="/images/entrenador1.jpg"/>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-primary" type="submit">Guardar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ✅ Listado de entrenadores -->
+<section th:fragment="listado" class="p-3">
+    <div class="row p-3">
+        <div class="col-md-9">
+            <div class="card p-2">
+                <div class="card-header">
+                    <h4>Listado de Entrenadores</h4>
+                </div>
+                <div class="card-body">
+                    <div th:if="${entrenadores != null and !entrenadores.empty}">
+                        <table class="table table-dark table-striped table-hover">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Nombre</th>
+                                    <th>Especialidad</th>
+                                    <th>Experiencia</th>
+                                    <th>Imagen</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr th:each="e : ${entrenadores}">
+                                    <td th:text="${e.id}"></td>
+                                    <td th:text="${e.nombre}"></td>
+                                    <td th:text="${e.especialidad}"></td>
+                                    <td th:text="${e.experiencia} + ' años'"></td>
+                                    <td>
+                                        <img th:src="${e.imagen}" alt="imagen" width="80"/>
+                                    </td>
+                                    <td>
+                                        <a th:href="@{'/entrenador/modificar/' + ${e.id}}" class="btn btn-success btn-sm">
+                                            <i class="fas fa-pencil-alt"></i> Modificar
+                                        </a>
+                                        <a th:href="@{'/entrenador/eliminar/' + ${e.id}}" class="btn btn-danger btn-sm"
+                                           onclick="return confirm('¿Seguro que deseas eliminar este entrenador?');">
+                                            <i class="fas fa-trash"></i> Eliminar
+                                        </a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div th:if="${entrenadores == null or entrenadores.empty}" class="text-center p-2">
+                        <span>No hay entrenadores registrados.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card text-center bg-success text-white mb-3">
+                <div class="card-body">
+                    <h3>Total Entrenadores</h3>
+                    <h4 class="fs-2"><i class="fas fa-dumbbell"></i> [[${totalEntrenadores}]]</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+</body>
+</html>

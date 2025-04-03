@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout/plantilla :: head}">
+    <title>Historial de Entrenamientos</title>
+</head>
+<body>
+<header th:replace="~{layout/plantilla :: header}" />
+
+<section class="container my-5">
+    <h2 class="text-center fw-bold">Historial de Entrenamientos</h2>
+
+    <div th:if="${#lists.isEmpty(entrenamientos)}" class="alert alert-info mt-3">
+        Aún no tienes entrenamientos registrados.
+    </div>
+
+    <table class="table table-bordered mt-3" th:if="${!#lists.isEmpty(entrenamientos)}">
+        <thead>
+            <tr>
+                <th>Fecha</th>
+                <th>Descripción</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="sesion : ${entrenamientos}">
+                <td th:text="${sesion.fecha}"></td>
+                <td th:text="${sesion.descripcion}"></td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+
+<footer th:replace="~{layout/plantilla :: footer}" />
+</body>
+</html>

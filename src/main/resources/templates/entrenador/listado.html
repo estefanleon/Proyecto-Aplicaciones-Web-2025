@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout/plantilla :: head}">
+    <title>Entrenadores</title>
+    <meta charset="UTF-8"/>
+</head>
+<body>
+    <header th:replace="~{layout/plantilla :: header}"/>
+
+    <!-- Fragmentos para botón + modal + tabla -->
+    <section th:replace="~{entrenador/fragmentos :: btnAgregar}"/>
+    <section th:replace="~{entrenador/fragmentos :: agregarEntrenador}"/>
+    <section th:replace="~{entrenador/fragmentos :: listado}"/>
+
+    <footer th:replace="~{layout/plantilla :: footer}"/>
+</body>
+</html>
