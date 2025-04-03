@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{layout/plantilla :: head}">
+    <title>Reservar Clase</title>
+</head>
+<body>
+<header th:replace="~{layout/plantilla :: header}" />
+
+<!-- Mostrar usuario actual si está en sesión -->
+<p class="text-center mt-3" th:if="${session.usuario != null}">
+    Usuario actual: <span th:text="${session.usuario.name}"></span> - Rol: <span th:text="${session.usuario.role}"></span>
+</p>
+
+<section class="container my-5">
+    <h2 class="text-center fw-bold">Reservar Clase</h2>
+
+    <div class="card mx-auto" style="max-width: 500px;">
+        <div class="card-body">
+            <h5 class="card-title" th:text="${reserva.clase.nombre}">Nombre de la clase</h5>
+            <p class="card-text" th:text="${reserva.clase.descripcion}">Descripción</p>
+            <p><strong>Horario:</strong> <span th:text="${reserva.clase.horario}"></span></p>
+            <p><strong>Entrenador:</strong> <span th:text="${reserva.clase.entrenador}"></span></p>
+
+            <!-- ✅ Formulario corregido -->
+            <form th:action="@{/guardarReserva}" th:object="${reserva}" method="post">
+                <input type="hidden" th:field="*{clase.id}" />
+                <input type="hidden" name="correo" th:value="${session.usuario.email}" />
+                <button type="submit" class="btn btn-primary w-100 mt-3">Confirmar Reserva</button>
+            </form>
+        </div>
+    </div>
+</section>
+
+<footer th:replace="~{layout/plantilla :: footer}" />
+</body>
+</html>

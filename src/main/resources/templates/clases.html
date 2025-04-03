@@ -1,38 +1,63 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
-
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="~{layout/plantilla :: head}">
-    <title>Clases - GymApp</title>
+    <title>Clases Disponibles</title>
 </head>
 <body>
-<header th:replace="~{layout/plantilla :: header}"/>
+<header th:replace="~{layout/plantilla :: header}" />
+
+<!-- ✅ Alerta de confirmación/cancelación -->
+<div class="container mt-3" th:if="${mensaje}">
+    <div th:class="'alert alert-' + ${tipo} + ' alert-dismissible fade show'" role="alert">
+        <strong th:text="${mensaje}">Mensaje</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+</div>
 
 <section class="container my-5">
     <h2 class="text-center fw-bold">Clases Disponibles</h2>
 
-    <!-- Mensaje si no hay clases -->
     <div class="row mt-4" th:if="${#lists.isEmpty(clases)}">
-        <p class="text-center">No hay clases registradas.</p>
+        <p class="text-center">No hay clases disponibles por ahora.</p>
     </div>
 
-    <!-- Tarjetas de clases -->
-    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 mt-3" th:if="${not #lists.isEmpty(clases)}">
-        <div class="col" th:each="clase : ${clases}">
+    <div class="row" th:each="clase : ${clases}">
+        <div class="col-md-4 mb-4">
             <div class="card h-100">
-                <img th:src="${clase.imagen}" class="card-img-top" alt="Imagen de clase"/>
+                <img th:src="${clase.imagen}" class="card-img-top" alt="Imagen de la clase" />
                 <div class="card-body">
                     <h5 class="card-title" th:text="${clase.nombre}">Nombre</h5>
                     <p class="card-text" th:text="${clase.descripcion}">Descripción</p>
-                    <p class="card-text"><strong>Horario:</strong> <span th:text="${clase.horario}"></span></p>
-                    <p class="card-text"><strong>Entrenador:</strong> <span th:text="${clase.entrenador}"></span></p>
+                    <p><strong>Horario:</strong> <span th:text="${clase.horario}"></span></p>
+                    <p><strong>Entrenador:</strong> <span th:text="${clase.entrenador}"></span></p>
+
+                    <!-- ✅ Si el usuario ya reservó esta clase -->
+                    <div th:if="${session.usuario != null and clasesReservadas.contains(clase.id)}">
+                        <form th:action="@{/cancelarReserva}" method="post">
+                            <input type="hidden" name="idClase" th:value="${clase.id}" />
+                            <input type="hidden" name="correo" th:value="${session.usuario.email}" />
+                            <button class="btn btn-danger w-100">Cancelar Reserva</button>
+                        </form>
+                    </div>
+
+                    <!-- ✅ Si el usuario NO la ha reservado aún -->
+                    <div th:if="${session.usuario != null and !clasesReservadas.contains(clase.id)}">
+                        <form th:action="@{'/reservar/' + ${clase.id}}" method="get">
+                            <button type="submit" class="btn btn-primary w-100">Reservar</button>
+                        </form>
+                    </div>
+
+                    <!-- ✅ Si no hay usuario logueado -->
+                    <div th:if="${session.usuario == null}">
+                        <a href="/login" class="btn btn-warning w-100">Inicia sesión para reservar</a>
+                    </div>
+
                 </div>
             </div>
         </div>
     </div>
 </section>
 
-<footer th:replace="~{layout/plantilla :: footer}"/>
+<footer th:replace="~{layout/plantilla :: footer}" />
 </body>
 </html>

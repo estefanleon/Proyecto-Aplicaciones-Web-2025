@@ -29,6 +29,7 @@ public class User implements Serializable {
     @Column(name = "created_at", updatable = false, insertable = false)
     private String createdAt;
 
+
     public enum Role {
         USER, ADMIN, TRAINER
     }

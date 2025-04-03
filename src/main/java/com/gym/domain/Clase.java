@@ -8,28 +8,73 @@ import lombok.Data;
 @Table(name = "clases")
 public class Clase {
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    public String getHorario() {
+        return horario;
+    }
+
+    public void setHorario(String horario) {
+        this.horario = horario;
+    }
+
+    public String getEntrenador() {
+        return entrenador;
+    }
+
+    public void setEntrenador(String entrenador) {
+        this.entrenador = entrenador;
+    }
+
+    public String getImagen() {
+        return imagen;
+    }
+
+    public void setImagen(String imagen) {
+        this.imagen = imagen;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idClase")
-    public Long id;
+    private Long id;
 
     @Column(name = "nombreClase")
-    public String nombre;
+    private String nombre;
 
     @Column(name = "descripcionClase")
-    public String descripcion;
+    private String descripcion;
 
     @Column(name = "horarioClase")
-    public String horario;
+    private String horario;
 
     @Column(name = "nombreEntrenador")
-    public String entrenador;
+    private String entrenador;
 
-@Column(name = "imagenClase")
-public String imagen;
+    @Column(name = "imagenClase")
+    private String imagen;
 
-
-
-    @Column(name = "estadoReserva")
-    public String estado;
 }
+

@@ -16,4 +16,13 @@ public class ClaseService {
     public List<Clase> getClases() {
         return claseRepository.findAll();
     }
+
+    public Clase getClaseById(Long id) {
+        return claseRepository.findById(id).orElse(null);
+    }
+
+    // ✅ Método para guardar o actualizar una clase
+    public void save(Clase clase) {
+        claseRepository.save(clase);
+    }
 }

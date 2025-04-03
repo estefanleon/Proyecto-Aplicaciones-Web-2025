@@ -53,12 +53,12 @@ CREATE TABLE clases (
 
 ALTER TABLE clases ADD estadoReserva ENUM('DISPONIBLE', 'RESERVADA') NOT NULL DEFAULT 'DISPONIBLE';
 
-
 CREATE TABLE reservas (
     idReserva BIGINT AUTO_INCREMENT PRIMARY KEY,
-    nombreUsuario VARCHAR(100) NOT NULL, -- Guardamos el nombre del usuario en vez del ID
-    nombreClase VARCHAR(100) NOT NULL, -- Guardamos el nombre de la clase en vez del ID
-    fechaReserva TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    correoUsuario VARCHAR(100) NOT NULL,
+    idClase BIGINT NOT NULL,
+    fechaReserva DATE NOT NULL,
+    FOREIGN KEY (idClase) REFERENCES clases(idClase)
 );
 
 
@@ -71,12 +71,6 @@ VALUES
 ('Yoga Fit', 'Yoga con ejercicios funcionales', 'Miércoles 8:00 AM', 'Juan Pérez', '/images/yoga_fit.jpg'),
 ('Baile Activo', 'Clases de baile fitness', 'Jueves 6:30 PM', 'Carlos Ramírez', '/images/baile_activo.jpg');
 
--- Insertar reservas
-INSERT INTO reservas (nombreUsuario, nombreClase) 
-VALUES 
-('Pedro López', 'Cross Training'), 
-('Ana Martínez', 'Aqua Box'),
-('Luis Gómez', 'Yoga Fit');
 
 
 
@@ -141,3 +135,6 @@ VALUES
   'DISPONIBLE'
 );
 
+ALTER TABLE reservas ADD COLUMN idUsuario BIGINT;
+ALTER TABLE reservas DROP COLUMN correoUsuario;
+ALTER TABLE clases DROP COLUMN estadoReserva;

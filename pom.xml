@@ -81,13 +81,13 @@
             <artifactId>font-awesome</artifactId>
             <version>6.4.2</version>
         </dependency>
+<!-- Spring Boot Starter Test (incluye JUnit 5) -->
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-test</artifactId>
+    <scope>test</scope>
+</dependency>
 
-        <!-- ✅ Dependencias de prueba -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
-        </dependency>
         
     </dependencies>
 
@@ -111,5 +111,9 @@
             </plugin>
         </plugins>
     </build>
+
+
+
+
 
 </project>
