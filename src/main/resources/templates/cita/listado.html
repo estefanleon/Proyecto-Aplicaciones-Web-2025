@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout/plantilla :: head}">
+    <title>Citas Solicitadas</title>
+    <meta charset="UTF-8"/>
+</head>
+<body>
+<header th:replace="~{layout/plantilla :: header}"/>
+
+<div class="container mt-5">
+    <h2 class="text-center">Citas Solicitadas</h2>
+
+    <div th:if="${citas != null and !citas.empty}">
+        <table class="table table-bordered table-striped mt-4">
+            <thead class="table-dark">
+                <tr>
+                    <th>#</th>
+                    <th>Cliente</th>
+                    <th>Correo</th>
+                    <th>Entrenador</th>
+                    <th>Fecha</th>
+                    <th>Detalle</th>
+                    <th>Estado</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="cita, stat : ${citas}">
+                    <td th:text="${stat.count}"></td>
+                    <td th:text="${cita.nombreCliente}"></td>
+                    <td th:text="${cita.emailCliente}"></td>
+                    <td th:text="${cita.entrenador.name}"></td>
+                    <td th:text="${#dates.format(cita.fecha, 'yyyy-MM-dd')}"></td>
+                    <td th:text="${cita.detalle}"></td>
+                    <td th:text="${cita.estado}"></td>
+                    <td>
+                        <div th:if="${cita.estado.name() == 'PENDIENTE'}">
+                            <form th:action="@{/cita/aceptar}" method="post" style="display:inline;">
+                                <input type="hidden" name="id" th:value="${cita.id}" />
+                                <button type="submit" class="btn btn-success btn-sm">Aceptar</button>
+                            </form>
+                            <form th:action="@{/cita/rechazar}" method="post" style="display:inline;">
+                                <input type="hidden" name="id" th:value="${cita.id}" />
+                                <button type="submit" class="btn btn-danger btn-sm">Rechazar</button>
+                            </form>
+                        </div>
+                        <div th:if="${cita.estado.name() != 'PENDIENTE'}">
+                            <span class="text-muted">Ya gestionada</span>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div th:if="${citas == null or citas.empty}" class="alert alert-info text-center mt-4">
+        No hay citas registradas por el momento.
+    </div>
+</div>
+
+<footer th:replace="~{layout/plantilla :: footer}"/>
+</body>
+</html>

@@ -20,11 +20,13 @@ public class User implements Serializable {
 
     @Enumerated(EnumType.STRING)
     private Role role = Role.USER;
-
+    
     // 📌 Relación con la membresía
     @ManyToOne
     @JoinColumn(name = "membresia_id")
     private Membresia membresia;
+    
+    
 
     @Column(name = "created_at", updatable = false, insertable = false)
     private String createdAt;
@@ -90,4 +92,9 @@ public class User implements Serializable {
     public void setCreatedAt(String createdAt) {
         this.createdAt = createdAt;
     }
+    
+    
+
+
+    
 }

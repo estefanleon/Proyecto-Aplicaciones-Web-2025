@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout/plantilla :: head}">
+    <title>Modificar Equipo</title>
+    <meta charset="UTF-8"/>
+</head>
+<body>
+<header th:replace="~{layout/plantilla :: header}"/>
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <div class="card">
+                <div class="card-header bg-warning text-white">
+                    <h4>Modificar Equipo</h4>
+                </div>
+                <div class="card-body">
+                    <!-- Formulario para editar equipo -->
+                    <form th:action="@{/equipo/guardar}" th:object="${equipo}" method="POST">
+                        <input type="hidden" th:field="*{id}"/>
+
+                        <div class="mb-3">
+                            <label for="nombre" class="form-label">Nombre</label>
+<input type="text" class="form-control" th:field="*{nombre}" required="required"/>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="descripcion" class="form-label">Descripción</label>
+                            <textarea class="form-control" th:field="*{descripcion}" required="required"></textarea>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="estado" class="form-label">Estado</label>
+                            <select class="form-control" th:field="*{estado}">
+                                <option value="Bueno">Bueno</option>
+                                <option value="Mantenimiento">Mantenimiento</option>
+                                <option value="Dañado">Dañado</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="fecha_ingreso" class="form-label">Fecha de Ingreso</label>
+                            <input type="date" class="form-control" th:field="*{fechaIngreso}" required="required"/>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="imagen" class="form-label">Ruta de Imagen</label>
+                            <input type="text" class="form-control" th:field="*{imagen}" placeholder="/images/equipo1.jpg"/>
+                        </div>
+
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-success">Guardar Cambios</button>
+                            <a th:href="@{/equipo/listado}" class="btn btn-secondary">Cancelar</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer th:replace="~{layout/plantilla :: footer}"/>
+</body>
+</html>

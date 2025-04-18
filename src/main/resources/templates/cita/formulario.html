@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout/plantilla :: head}">
+    <title>Solicitar Cita</title>
+    <meta charset="UTF-8"/>
+</head>
+<body>
+<header th:replace="~{layout/plantilla :: header}"/>
+
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Solicitar Cita Personalizada</h2>
+
+    <form th:action="@{/cita/guardar}" th:object="${cita}" method="POST" class="needs-validation" novalidate>
+        <div class="mb-3">
+            <label class="form-label">Nombre del Cliente</label>
+            <input type="text" th:field="*{nombreCliente}" class="form-control" placeholder="Tu nombre" required/>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Correo Electrónico</label>
+            <input type="email" th:field="*{emailCliente}" class="form-control" placeholder="correo@ejemplo.com" required/>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Entrenador</label>
+            <select th:field="*{entrenador}" class="form-control" required>
+                <option value="" disabled selected>Seleccione un entrenador</option>
+                <option th:each="entrenador : ${entrenadores}" th:value="${entrenador.nombre}" th:text="${entrenador.nombre}"></option>
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Fecha de la Cita</label>
+            <input type="date" th:field="*{fecha}" class="form-control" required/>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Motivo / Objetivo</label>
+            <textarea th:field="*{detalle}" class="form-control" rows="3" required></textarea>
+        </div>
+
+        <div class="text-center">
+            <button class="btn btn-primary" type="submit">Solicitar Cita</button>
+            <a th:href="@{/}" class="btn btn-secondary">Cancelar</a>
+        </div>
+    </form>
+</div>
+
+<footer th:replace="~{layout/plantilla :: footer}"/>
+</body>
+</html>

@@ -47,23 +47,32 @@
     <a class="nav-link" th:href="@{/user/listado}">Usuarios</a>
 </li>
 
-    
+      <li class="nav-item px-2"><a class="nav-link" th:href="@{/instalaciones}">Instalaciones</a></li>
+          <li class="nav-item px-2"><a class="nav-link" th:href="@{/QuejasSugerencias}">Quejas y Sugerencias</a></li>
+          
+          
         <li class="nav-item" th:if="${session.usuario != null and session.usuario.role.name() == 'ADMIN'}">
-    <a class="nav-link" th:href="@{/entrenador/listado}">Entrenadores</a>
+    <a class="nav-link" th:href="@{/equipo/listado}">Equipo</a>
 </li>
     
     <li class="nav-item" th:if="${session.usuario != null and session.usuario.role.name() == 'ADMIN'}">
     <a class="nav-link" th:href="@{/admin/clases/listado}">Clases</a>
 </li>
 
-    
-    
-    <li class="nav-item px-2" th:if="${session.usuario != null and session.usuario.role.name() == 'USER'}">
-        <a class="nav-link" th:href="@{/acceso}">Acceder Instalaciones</a>
-    </li>
+    <li class="nav-item" th:if="${session.usuario != null and session.usuario.role.name() == 'USER'}">
+    <a class="nav-link" th:href="@{/cita/solicitar}">Solicitar Cita</a>
+</li>
 
 
-    
+<li class="nav-item" th:if="${session.usuario != null and session.usuario.role.name() == 'TRAINER'}">
+    <a class="nav-link" th:href="@{/cita/listado}">Citas Asignadas</a>
+</li>
+
+
+    <li class="nav-item" th:if="${session.usuario != null and session.usuario.role.name() == 'ADMIN'}">
+    <a class="nav-link" th:href="@{/ganancia/ganancias}">Reporte de Ganancias</a>
+</li>
+
         <li class="nav-item px-2" th:if="${session.usuario != null and session.usuario.role.name() == 'USER'}">
         <a class="nav-link" th:href="@{/historial}">Historial</a>
     </li>
