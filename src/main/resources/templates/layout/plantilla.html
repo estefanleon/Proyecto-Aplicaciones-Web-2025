@@ -98,9 +98,10 @@
     <li class="nav-item px-2"><a class="nav-link" th:href="@{/EntrenadorIndex}">Entrenadores</a></li>
     <li class="nav-item px-2"><a class="nav-link" th:href="@{/blog}">Blog</a></li>
     <li class="nav-item px-2"><a class="nav-link" th:href="@{/QuejasSugerencias}">Quejas y Sugerencias</a></li>
-    
-    <li class="nav-item px-2"><a class="nav-link" th:href="@{/entrenamientos}">Entrenamiento</a></li>
-    
+
+        <li class="nav-item" th:if="${session.usuario != null and session.usuario.role.name() == 'USER'}">
+    <a class="nav-link" th:href="@{/entrenamientos}">Entrenamiento</a>
+</li>
     
 
 </ul>
