@@ -8,11 +8,11 @@
     <body>
 
         <!-- 1. Botón para abrir el modal de agregar usuario -->
-        <section th:fragment="btnAgregar" class="py-4 mb-4 bg-light">
+        <section th:fragment="btnAgregar" class="py-4 mb-4" style="background-color: #1e2124;">
             <div class="container">
                 <div class="row">
                     <div class="col-md-3">   
-                        <button type="button" class="btn btn-primary btn-block" 
+                        <button type="button" class="btn btn-warning text-dark fw-bold" 
                                 data-bs-toggle="modal" data-bs-target="#agregarUsuario">
                             <i class="fas fa-plus"></i> [[#{usuario.agregar}]]
                         </button>
@@ -26,10 +26,10 @@
             <div id="agregarUsuario" class="modal fade" tabindex="-1" 
                  aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-md">
-                    <div class="modal-content">
-                        <div class="modal-header bg-info text-white">
+                    <div class="modal-content bg-light">
+                        <div class="modal-header" style="background-color: #1e2124; color: white;">
                             <h5 class="modal-title">[[#{usuario.agregar}]]</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div> 
                         <form th:action="@{/user/guardar}" th:object="${user}" method="POST" class="was-validated">
                             <div class="modal-body">
@@ -55,7 +55,7 @@
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <button class="btn btn-primary" type="submit">Guardar</button>
+                                <button class="btn btn-warning text-dark fw-bold" type="submit">Guardar</button>
                             </div>
                         </form>
                     </div>
@@ -63,55 +63,68 @@
             </div>
         </section>
 
-        <!-- 3. Listado de usuarios -->
+        <!-- 3. Listado de usuarios - Título principal -->
+        <section class="text-center py-4">
+            <h1 class="display-4 fw-bold text-uppercase">USUARIOS</h1>
+            <p class="text-muted">Administración de usuarios del sistema</p>
+        </section>
+
+        <!-- 4. Listado de usuarios - Contenido -->
         <section th:fragment="listado" class="p-3">
-            <div class="row p-3">
-                <div class="col-md-9">
-                    <div class="card p-2">
-                        <div class="card-header">
-                            <h4>[[#{usuario.listado}]]</h4>
-                        </div>
-                        <div class="card-body">
-                            <div th:if="${users != null and !users.empty}">
-                                <table class="table table-dark table-striped table-hover">
-                                    <thead>
-                                        <tr>
-                                            <th>#</th>
-                                            <th>[[#{usuario.nombre}]]</th>
-                                            <th>[[#{usuario.email}]]</th>
-                                            <th>[[#{usuario.rol}]]</th>
-                                            <th></th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr th:each="u : ${users}">
-                                            <td>[[${u.id}]]</td>
-                                            <td>[[${u.name}]]</td>
-                                            <td>[[${u.email}]]</td>
-                                            <td>[[${u.role}]]</td>
-                                            <td>
-                                                <a class="btn btn-danger" th:href="@{/user/eliminar/}+${u.id}">
-                                                    <i class="fas fa-trash"></i> [[#{accion.eliminar}]]
-                                                </a>
-                                                <a class="btn btn-success" th:href="@{/user/modificar/}+${u.id}">
-                                                    <i class="fas fa-pencil"></i> [[#{accion.actualizar}]]
-                                                </a>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+            <div class="container">
+                <div class="row p-3">
+                    <div class="col-md-9">
+                        <div class="card">
+                            <div class="card-header" style="background-color: #1e2124; color: white;">
+                                <h4>[[#{usuario.listado}]]</h4>
                             </div>
-                            <div class="text-center p-2" th:if="${users == null or users.empty}">
-                                <span>[[#{lista.vacia}]]</span>
+                            <div class="card-body">
+                                <div th:if="${users != null and !users.empty}">
+                                    <table class="table table-striped table-hover">
+                                        <thead style="background-color: #1e2124; color: white;">
+                                            <tr>
+                                                <th>#</th>
+                                                <th>[[#{usuario.nombre}]]</th>
+                                                <th>[[#{usuario.email}]]</th>
+                                                <th>[[#{usuario.rol}]]</th>
+                                                <th>Acciones</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr th:each="u : ${users}">
+                                                <td>[[${u.id}]]</td>
+                                                <td>[[${u.name}]]</td>
+                                                <td>[[${u.email}]]</td>
+                                                <td>[[${u.role}]]</td>
+                                                <td>
+                                                    <a class="btn btn-danger btn-sm" th:href="@{/user/eliminar/}+${u.id}">
+                                                        <i class="fas fa-trash"></i> [[#{accion.eliminar}]]
+                                                    </a>
+                                                    <a class="btn btn-warning btn-sm text-dark" th:href="@{/user/modificar/}+${u.id}">
+                                                        <i class="fas fa-pencil"></i> [[#{accion.actualizar}]]
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="text-center p-2" th:if="${users == null or users.empty}">
+                                    <span>[[#{lista.vacia}]]</span>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="card text-center bg-success text-white mb-3">
-                        <div class="card-body">
-                            <h3>[[#{usuario.total}]]</h3>
-                            <h4 class="fs-2"><i class="fas fa-users"></i> [[${totalUsers}]]</h4>
+                    <div class="col-md-3">
+                        <div class="card text-center mb-3" style="background-color: #1e2124; color: white;">
+                            <div class="card-body">
+                                <h3>[[#{usuario.total}]]</h3>
+                                <h4 class="fs-2"><i class="fas fa-users"></i> [[${totalUsers}]]</h4>
+                            </div>
+                        </div>
+                        <div class="card p-3 mb-3 text-center">
+                            <a href="#" class="btn btn-warning text-dark fw-bold">
+                                <i class="fas fa-download"></i> Exportar Usuarios
+                            </a>
                         </div>
                     </div>
                 </div>
