@@ -189,3 +189,16 @@ CREATE TABLE ingresos (
     membresia_id BIGINT,
     FOREIGN KEY (membresia_id) REFERENCES membresias(id)
 );
+CREATE TABLE entrenamientos (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(100),
+    completado BOOLEAN
+);
+
+
+
+ALTER TABLE sesion_entrenamiento ADD COLUMN notas TEXT;
+ALTER TABLE sesion_entrenamiento ADD COLUMN tipoEntrenamiento VARCHAR(100);
+
+ALTER TABLE sesion_entrenamiento ADD COLUMN duracion INT;
+ALTER TABLE sesion_entrenamiento ADD COLUMN fecha_registro DATETIME;
