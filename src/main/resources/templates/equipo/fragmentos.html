@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
-<head>
+<head th:replace="~{layout/plantilla :: head}">
     <meta charset="UTF-8">
-    <title>Fragmentos Equipos</title>
+    <title>Equipos</title>
 </head>
 <body>
 
-<!-- ✅ Botón para agregar -->
-<section th:fragment="btnAgregar" class="py-4 mb-4 bg-light">
+<!-- Botón para agregar -->
+<section th:fragment="btnAgregar" class="mb-4">
     <div class="container">
         <div class="row">
             <div class="col-md-3">
-                <button type="button" class="btn btn-primary btn-block"
+                <button type="button" class="btn btn-warning fw-bold" 
                         data-bs-toggle="modal" data-bs-target="#agregarEquipo">
                     <i class="fas fa-plus"></i> Agregar Equipo
                 </button>
@@ -21,15 +21,15 @@
     </div>
 </section>
 
-<!-- ✅ Modal para agregar equipo -->
+<!-- Modal para agregar equipo -->
 <section th:fragment="agregarEquipo">
     <div id="agregarEquipo" class="modal fade" tabindex="-1"
          aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-md">
-            <div class="modal-content">
-                <div class="modal-header bg-info text-white">
+            <div class="modal-content bg-light">
+                <div class="modal-header" style="background-color: #1e2124; color: white;">
                     <h5 class="modal-title">Agregar Equipo</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
                             aria-label="Close"></button>
                 </div>
                 <form th:action="@{/equipo/guardar}" th:object="${equipo}" method="POST" class="was-validated">
@@ -56,7 +56,7 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button class="btn btn-primary" type="submit">Guardar</button>
+                        <button class="btn btn-warning fw-bold" type="submit">Guardar</button>
                     </div>
                 </form>
             </div>
@@ -64,65 +64,69 @@
     </div>
 </section>
 
-<!-- ✅ Listado de equipos -->
-<section th:fragment="listado" class="p-3">
-    <div class="row p-3">
-        <div class="col-md-9">
-            <div class="card p-2">
-                <div class="card-header">
-                    <h4>Listado de Equipos</h4>
-                </div>
-                <div class="card-body">
-                    <div th:if="${equipos != null and !equipos.empty}">
-                        <table class="table table-dark table-striped table-hover">
-                            <thead>
-                                <tr>
-                                    <th>#</th>
-                                    <th>Nombre</th>
-                                    <th>Descripción</th>
-                                    <th>Estado</th>
-                                    <th>Fecha Ingreso</th>
-                                    <th>Imagen</th>
-                                    <th>Acciones</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr th:each="e : ${equipos}">
-                                    <td th:text="${e.id}"></td>
-                                    <td th:text="${e.nombre}"></td>
-                                    <td th:text="${e.descripcion}"></td>
-                                    <td th:text="${e.estado}"></td>
-                                    <td th:text="${e.fechaIngreso}"></td>
-                                    <td><img th:src="${e.imagen}" alt="imagen" width="80"/>
-
-                                    
-                                    </td>
-                                    
-                                    <td>
-                                        <a th:href="@{'/equipo/modificar/' + ${e.id}}" class="btn btn-success btn-sm">
-                                            <i class="fas fa-pencil-alt"></i> Modificar
-                                        </a>
-                                        <a th:href="@{'/equipo/eliminar/' + ${e.id}}" class="btn btn-danger btn-sm"
-                                           onclick="return confirm('¿Seguro que deseas eliminar este equipo?');">
-                                            <i class="fas fa-trash"></i> Eliminar
-                                        </a>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
+<!-- Listado de equipos -->
+<section th:fragment="listado">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-9">
+                <div class="card bg-dark text-white">
+                    <div class="card-header">
+                        <h4>Listado de Equipos</h4>
                     </div>
-                    <div th:if="${equipos == null or equipos.empty}" class="text-center p-2">
-                        <span>No hay equipos registrados.</span>
+                    <div class="card-body p-0">
+                        <div th:if="${equipos != null and !equipos.empty}">
+                            <table class="table table-dark table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Nombre</th>
+                                        <th>Descripción</th>
+                                        <th>Estado</th>
+                                        <th>Fecha Ingreso</th>
+                                        <th>Imagen</th>
+                                        <th>Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr th:each="e : ${equipos}">
+                                        <td>[[${e.id}]]</td>
+                                        <td>[[${e.nombre}]]</td>
+                                        <td>[[${e.descripcion}]]</td>
+                                        <td>[[${e.estado}]]</td>
+                                        <td>[[${e.fechaIngreso}]]</td>
+                                        <td><img th:src="${e.imagen}" alt="imagen" width="80"/></td>
+                                        <td>
+                                            <a class="btn btn-danger btn-sm" th:href="@{'/equipo/eliminar/' + ${e.id}}">
+                                                <i class="fas fa-trash"></i> Eliminar
+                                            </a>
+                                            <a class="btn btn-warning btn-sm" th:href="@{'/equipo/modificar/' + ${e.id}}">
+                                                <i class="fas fa-pencil"></i> Actualizar
+                                            </a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div th:if="${equipos == null or equipos.empty}" class="text-center p-2">
+                            <span>No hay equipos registrados.</span>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
 
-        <div class="col-md-3">
-            <div class="card text-center bg-success text-white mb-3">
-                <div class="card-body">
-                    <h3>Total Equipos</h3>
-                    <h4 class="fs-2"><i class="fas fa-cogs"></i> [[${totalEquipos}]]</h4>
+            <div class="col-md-3">
+                <div class="card text-center bg-dark text-white mb-3">
+                    <div class="card-body">
+                        <h3>Total de Equipos</h3>
+                        <h4 class="fs-2">
+                            <i class="fas fa-cogs"></i> <span>[[${totalEquipos}]]</span>
+                        </h4>
+                    </div>
+                </div>
+                <div class="card p-3 mb-3 text-center">
+                    <a href="#" class="btn btn-warning fw-bold">
+                        <i class="fas fa-download"></i> Exportar Equipos
+                    </a>
                 </div>
             </div>
         </div>
