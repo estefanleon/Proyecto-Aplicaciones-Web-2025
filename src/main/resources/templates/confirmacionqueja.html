@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="~{layout/plantilla :: head}">
+        <title>Confirmación - GymApp</title>
+        <meta charset="UTF-8"/>
+    </head>
+    <body>
+        <header th:replace="~{layout/plantilla :: header}"/>
+        
+        <!-- Sección de Confirmación -->
+        <section class="container mt-5">
+            <div class="row justify-content-center">
+                <div class="col-md-8 text-center">
+                    <div class="card shadow border-0 mb-5">
+                        <div class="card-body py-5">
+                            <i class="bi bi-check-circle-fill text-success display-1 mb-4"></i>
+                            <h1 class="display-4 fw-bold">¡Mensaje enviado!</h1>
+                            <p class="lead mb-4">Gracias por contactarnos. Hemos recibido tu mensaje correctamente.</p>
+                            <p class="mb-5">Nuestro equipo revisará tu comentario y, si es necesario, nos pondremos en contacto contigo lo antes posible.</p>
+                            <a href="/QuejasSugerencias" class="btn btn-outline-secondary me-2">Volver a Quejas y Sugerencias</a>
+                            <a href="/" class="btn btn-warning">Ir al Inicio</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <footer th:replace="~{layout/plantilla :: footer}"/>
+    </body>
+</html>

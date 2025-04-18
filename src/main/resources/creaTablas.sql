@@ -145,3 +145,47 @@ VALUES
 ('Entrenamiento de pierna', '2025-03-20', 1),
 ('Cardio intenso', '2025-03-25', 1),
 ('Entrenamiento funcional', '2025-04-01', 1);
+
+
+
+CREATE TABLE equipos (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(100) NOT NULL,
+    descripcion TEXT,
+    estado VARCHAR(50), -- Ej: 'Bueno', 'Mantenimiento', 'Dañado'
+    fecha_ingreso DATE NOT NULL,
+    imagen VARCHAR(255)
+);
+
+
+INSERT INTO equipos (nombre, descripcion, estado, fecha_ingreso, imagen) VALUES
+('Caminadora Pro', 'Cinta para correr con inclinación automática.', 'Bueno', '2024-01-10', '/images/equipo1.jpg'),
+('Bicicleta Estática', 'Ideal para entrenamiento cardiovascular.', 'Mantenimiento', '2023-11-15', '/images/equipo2.jpg'),
+('Máquina de Remo', 'Entrenamiento de cuerpo completo.', 'Bueno', '2024-02-20', '/images/equipo3.jpg');
+
+
+DROP TABLE IF EXISTS cita;
+
+CREATE TABLE cita (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    nombre_cliente VARCHAR(100) NOT NULL,
+    email_cliente VARCHAR(100) NOT NULL,
+    detalle TEXT,
+    fecha DATE,
+    entrenador_id BIGINT,
+    CONSTRAINT fk_entrenador FOREIGN KEY (entrenador_id) REFERENCES users(id)
+);
+
+
+ALTER TABLE cita ADD COLUMN estado VARCHAR(20) NOT NULL DEFAULT 'PENDIENTE';
+
+
+
+
+CREATE TABLE ingresos (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    monto DECIMAL(10,2) NOT NULL,
+    fecha DATE NOT NULL, -- Fecha de vencimiento de la membresía
+    membresia_id BIGINT,
+    FOREIGN KEY (membresia_id) REFERENCES membresias(id)
+);

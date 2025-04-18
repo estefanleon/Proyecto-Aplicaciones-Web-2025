@@ -1,0 +1,64 @@
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="~{layout/plantilla :: head}">
+        <title>Instalaciones - GymApp</title>
+        <meta charset="UTF-8"/>
+    </head>
+    <body>
+        <header th:replace="~{layout/plantilla :: header}"/>
+        
+        <!-- Sección de Instalaciones -->
+        <section class="container mt-5">
+            <h1 class="fw-bold text-center">Nuestras Instalaciones</h1>
+            <p class="lead text-center mb-5">Conoce los espacios donde transformarás tu vida.</p>
+            
+            <!-- Mapa de Google -->
+            <h2 class="text-center mb-4">Nuestra Ubicación</h2>
+            <div class="ratio ratio-16x9 mb-5">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7858.257352345273!2d-84.13834770325535!3d10.006228510397918!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8fa0faf2a904804b%3A0xa3f88438516cc5e0!2sMercedes%2C%20Heredia!5e0!3m2!1ses-419!2scr!4v1744949527377!5m2!1ses-419!2scr" 
+                      style="border:0;" allowfullscreen="" loading="lazy" 
+                      referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+            
+            <!-- Código QR -->
+            <div class="row align-items-center mb-5">
+                <div class="col-md-6">
+                    <h2 class="mb-3">Escanea para llegar</h2>
+                    <p>Utiliza este código QR para abrir la ubicación en tu app de mapas favorita y llegar fácilmente a nuestro gimnasio.</p>
+                    <p><strong>Dirección:</strong> Mercedes Norte, Heredia, Costa Rica</p>
+                    <p><strong>Horario:</strong> Lunes a Viernes 5:00 AM - 10:00 PM | Sábados y Domingos 7:00 AM - 7:00 PM</p>
+                </div>
+                <div class="col-md-6 text-center">
+                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://maps.app.goo.gl/5GZ7G79yYJSAj3wt8" 
+                         class="img-fluid" alt="Código QR para ubicación">
+                </div>
+            </div>
+            
+            <!-- Galería de imágenes -->
+            <h2 class="text-center mb-4">Imágenes de las Instalaciones</h2>
+            <div class="row mb-5">
+                <div class="col-md-6 mb-4">
+                    <img src="https://cloudfront-us-east-1.images.arcpublishing.com/gruponacion/3LTKNCM5JFAUVMTNH4FACQOVDI.jpeg" 
+                         class="img-fluid rounded shadow" alt="Gold's Gym exterior">
+                </div>
+                <div class="col-md-6 mb-4">
+                    <img src="https://www.larepublica.net/storage/images/2020/12/22/20201222082746.goldgym.jpg" 
+                         class="img-fluid rounded shadow" alt="Gold's Gym entrada">
+                </div>
+                <div class="col-md-6 mb-4">
+                    <img src="https://res.cloudinary.com/ggus-dev/image/private/s--fpM1T85Y--/c_auto,g_auto,w_3840,h_1280/v1/2405e908/golds-gym-interior-treadmills.webp" 
+                         class="img-fluid rounded shadow" alt="Área cardiovascular">
+                </div>
+                <div class="col-md-6 mb-4">
+                    <img src="https://gnfworldwide.com/wp-content/uploads/2023/05/1-1-1.jpg" 
+                         class="img-fluid rounded shadow" alt="Área de pesas">
+                </div>
+            </div>
+            <p class="text-center mb-5 lead">Contamos con instalaciones modernas, equipamiento de última generación y amplios espacios para todos nuestros miembros.</p>
+        </section>
+        
+        <footer th:replace="~{layout/plantilla :: footer}"/>
+    </body>
+</html>

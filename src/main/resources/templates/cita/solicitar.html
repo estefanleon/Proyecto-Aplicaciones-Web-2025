@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout/plantilla :: head}">
+    <title>Solicitar Cita</title>
+</head>
+<body>
+<header th:replace="~{layout/plantilla :: header}"/>
+
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Solicitar Atención Personalizada</h2>
+
+    <!-- ✅ Mensaje de confirmación -->
+    <div th:if="${param.success}" class="alert alert-success text-center" role="alert">
+        ¡Tu solicitud ha sido enviada correctamente!
+    </div>
+
+    <form th:action="@{/cita/guardar}" th:object="${cita}" method="post" class="needs-validation">
+
+        <!-- ✅ Campo oculto para el nombre del cliente -->
+        <input type="hidden" th:field="*{nombreCliente}"/>
+        <input type="hidden" th:field="*{emailCliente}"/>
+
+        <!-- ✅ Selección de entrenador -->
+        <div class="mb-3">
+            <label for="entrenador" class="form-label">Selecciona un entrenador:</label>
+            <select class="form-select" th:field="*{entrenador.id}" required>
+                <option th:each="ent : ${entrenadores}" th:value="${ent.id}" th:text="${ent.name}">Entrenador</option>
+            </select>
+        </div>
+
+        <!-- ✅ Detalle o mensaje -->
+        <div class="mb-3">
+            <label for="detalle" class="form-label">Mensaje / Objetivo de la cita</label>
+            <textarea class="form-control" th:field="*{detalle}" required></textarea>
+        </div>
+
+        <!-- ✅ Fecha -->
+        <div class="mb-3">
+            <label for="fecha" class="form-label">Fecha deseada</label>
+            <input type="date" class="form-control" th:field="*{fecha}" required/>
+        </div>
+
+        <div class="text-center">
+            <button type="submit" class="btn btn-primary">Enviar Solicitud</button>
+        </div>
+    </form>
+</div>
+
+<footer th:replace="~{layout/plantilla :: footer}"/>
+</body>
+</html>

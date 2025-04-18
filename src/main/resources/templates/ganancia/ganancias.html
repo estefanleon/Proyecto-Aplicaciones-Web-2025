@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout/plantilla :: head}">
+    <title>Reporte de Ingresos</title>
+</head>
+<body>
+<header th:replace="~{layout/plantilla :: header}"/>
+
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Reporte de Ingresos</h2>
+
+    <!-- ✅ Botón corregido con ruta válida -->
+    <div class="text-end mb-3">
+        <a th:href="@{/ganancia/generar}" class="btn btn-success">Generar Ingresos</a>
+    </div>
+
+    <!-- ✅ Tabla de ingresos -->
+    <table class="table table-bordered table-hover">
+        <thead class="table-dark">
+            <tr>
+                <th>#</th>
+                <th>Monto</th>
+                <th>Fecha</th>
+                <th>Membresía</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="ingreso, stat : ${ingresos}">
+                <td th:text="${stat.count}"></td>
+                <td th:text="${ingreso.monto}"></td>
+                <td th:text="${#dates.format(ingreso.fecha, 'yyyy-MM-dd')}"></td>
+                <td th:text="${ingreso.membresia.tipo}"></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- ✅ Total de ganancias -->
+    <div class="alert alert-info mt-4 text-end">
+        <strong>Total de Ganancia: ₡</strong>
+        <span th:text="${totalGanancia}"></span>
+    </div>
+</div>
+
+<footer th:replace="~{layout/plantilla :: footer}"/>
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout/plantilla :: head}">
+    <title>Modificar Cita</title>
+</head>
+<body>
+<header th:replace="~{layout/plantilla :: header}"/>
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <div class="card">
+                <div class="card-header bg-warning text-white">
+                    <h4>Modificar Cita</h4>
+                </div>
+                <div class="card-body">
+                    <form th:action="@{/cita/guardar}" th:object="${cita}" method="post">
+                        <input type="hidden" th:field="*{id}" />
+                        
+                        <div class="mb-3">
+                            <label>Correo del Miembro</label>
+                            <input type="email" th:field="*{correo}" class="form-control" required/>
+                        </div>
+                        <div class="mb-3">
+                            <label>Entrenador</label>
+                            <select th:field="*{idEntrenador}" class="form-control">
+                                <option th:each="e : ${entrenadores}" 
+                                        th:value="${e.id}" 
+                                        th:text="${e.nombre}">Entrenador</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label>Fecha</label>
+                            <input type="date" th:field="*{fecha}" class="form-control" required/>
+                        </div>
+                        <div class="mb-3">
+                            <label>Hora</label>
+                            <input type="time" th:field="*{hora}" class="form-control" required/>
+                        </div>
+                        <div class="text-center">
+                            <button class="btn btn-success" type="submit">Guardar Cambios</button>
+                            <a th:href="@{/cita/listado}" class="btn btn-secondary">Cancelar</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer th:replace="~{layout/plantilla :: footer}"/>
+</body>
+</html>
