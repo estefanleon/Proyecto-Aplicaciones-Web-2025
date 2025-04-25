@@ -28,21 +28,21 @@ public class PaypalService {
     private APIContext apiContext;
     
     public Payment createPayment(
-    Double total, 
-            String currency,
-            String method,
-            String intent,
-            String descripcion,
-            String urlCancel,
-            String urlSuccess
-            ) throws PayPalRESTException {
+        Double total, 
+        String currency,
+        String method,
+        String intent,
+        String descripcion,
+        String urlCancel,
+        String urlSuccess
+    ) throws PayPalRESTException {
         
         // Se define la informacion sobre el monto a procesar
         Amount amount = new Amount();
         amount.setCurrency(currency);
-        amount.setTotal(String.format(Locale.US,"%.2f",total));
+        amount.setTotal(String.format(Locale.US, "%.2f", total));
         
-        //Se definde la transaccion a realizar
+        // Se define la transacción a realizar
         Transaction transaction = new Transaction();
         transaction.setDescription(descripcion);
         transaction.setAmount(amount);
@@ -50,22 +50,20 @@ public class PaypalService {
         List<Transaction> transactions = new ArrayList<>();
         transactions.add(transaction);
         
-        
-        //Se define las opciones del proceso de pago
+        // Se define las opciones del proceso de pago
         Payer payer = new Payer();
         payer.setPaymentMethod(method);
         
         // Se definen opciones dentro de pago
-        Payment payment = new Payment ();
+        Payment payment = new Payment();
         payment.setIntent(intent);
         payment.setPayer(payer);
         payment.setTransactions(transactions);
         
-        
-        // Se definen los url para regirigir los resultados del Paypal
+        // Se definen los URL para redirigir los resultados de PayPal
         RedirectUrls redirectUrls = new RedirectUrls();
         redirectUrls.setCancelUrl(urlCancel);
-        redirectUrls.setReturnUrl(urlCancel);
+        redirectUrls.setReturnUrl(urlSuccess);  // Se debe cambiar a la URL de éxito
         
         payment.setRedirectUrls(redirectUrls);
         
@@ -74,11 +72,10 @@ public class PaypalService {
     
     public Payment executePayment(String paymentId, String payerId) 
             throws PayPalRESTException {
-        Payment payment = new Payment ();
+        Payment payment = new Payment();
         payment.setId(paymentId);
         PaymentExecution paymentExecution = new PaymentExecution();
         paymentExecution.setPayerId(payerId);
         return payment.execute(apiContext, paymentExecution);
     }
-    
 }
