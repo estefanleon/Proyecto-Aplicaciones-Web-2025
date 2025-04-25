@@ -6,53 +6,58 @@
 <head th:replace="~{layout/plantilla :: head}">
     <title>GymApp</title>
     <meta charset="UTF-8"/>
-    
 </head>
 
 <body>
     <header th:replace="~{layout/plantilla :: header}"/>
-    <p th:if="${session.usuario != null}">Usuario actual: <span th:text="${session.usuario.name}"></span> - Rol: <span th:text="${session.usuario.role}"></span></p>
+    
+    <p th:if="${session.usuario != null}">
+        <span th:text="#{usuario.actual}">Usuario actual:</span> 
+        <span th:text="${session.usuario.name}"></span> - 
+        <span th:text="#{usuario.rol}">Rol:</span> 
+        <span th:text="${session.usuario.role}"></span>
+    </p>
 
     <!-- Sección Principal de Bienvenida -->
     <section class="hero bg-dark text-white text-center py-5">
         <div class="container">
-            <h1 class="display-3 fw-bold">GOLD'S GYM COSTA RICA</h1>
-            <p class="lead">JUNTOS, EN TU SALUD, EN TU VIDA.</p>
-            <a href="#" class="btn btn-warning btn-lg fw-bold">ÚNETE A LA FAMILIA GOLD'S GYM</a>
+            <h1 class="display-3 fw-bold" th:text="#{bienvenida.titulo}">GOLD'S GYM COSTA RICA</h1>
+            <p class="lead" th:text="#{bienvenida.frase}">JUNTOS, EN TU SALUD, EN TU VIDA.</p>
+            <a href="#" class="btn btn-warning btn-lg fw-bold" th:text="#{bienvenida.boton}">ÚNETE A LA FAMILIA GOLD'S GYM</a>
         </div>
     </section>
 
     <!-- Sección de Membresías -->
     <section class="container text-center py-5">
-        <h2 class="text-uppercase fw-bold">Membresía</h2>
-        <p class="fs-4 fw-bold text-warning">$75 + IVA</p>
-        <p>Conoce más sobre los diferentes planes y precios en Gold's Gym Costa Rica.</p>
-        <a href="/matricula/resumen?id=1" class="btn btn-warning btn-lg">Conviértete en Miembro</a>
+        <h2 class="text-uppercase fw-bold" th:text="#{membresia.titulo}">Membresía</h2>
+        <p class="fs-4 fw-bold text-warning" th:text="#{membresia.precio}">$75 + IVA</p>
+        <p th:text="#{membresia.descripcion}">Conoce más sobre los diferentes planes y precios en Gold's Gym Costa Rica.</p>
+        <a href="/matricula/resumen?id=1" class="btn btn-warning btn-lg" th:text="#{membresia.boton}">Conviértete en Miembro</a>
     </section>
 
     <!-- Sección de Servicios -->
     <section class="bg-light py-5">
         <div class="container">
-            <h2 class="text-uppercase text-center fw-bold">Servicios</h2>
-            <p class="text-center">Estamos contigo en tu progreso, contamos con personal altamente calificado para cuidarte y motivarte.</p>
+            <h2 class="text-uppercase text-center fw-bold" th:text="#{servicios.titulo}">Servicios</h2>
+            <p class="text-center" th:text="#{servicios.descripcion}">Estamos contigo en tu progreso, contamos con personal altamente calificado para cuidarte y motivarte.</p>
             <div class="row">
                 <div class="col-md-6">
                     <img src="https://aiguajoc.com/wp-content/uploads/PISCINA-2.webp" class="img-fluid rounded" alt="Piscina y vapor"/>
-                    <h4 class="text-center mt-2">Piscina + jacuzzi y cuarto de vapor</h4>
+                    <h4 class="text-center mt-2" th:text="#{servicios.piscina}">Piscina + jacuzzi y cuarto de vapor</h4>
                 </div>
                 <div class="col-md-6">
                     <img src="https://www.orangetheoryfitness.es/wp-content/uploads/2020/01/clases-colectivas-divertidas.jpg" class="img-fluid rounded" alt="Clases Grupales"/>
-                    <h4 class="text-center mt-2">Clases Grupales</h4>
+                    <h4 class="text-center mt-2" th:text="#{servicios.clases}">Clases Grupales</h4>
                 </div>
             </div>
         </div>
     </section>
-    
+
     <!-- Sección de Contacto -->
     <section class="contacto text-center py-5 bg-dark text-white">
         <div class="container">
-            <h2 class="text-uppercase fw-bold">Estemos en contacto</h2>
-            <p>Comunícate con nosotros en cualquiera de nuestras sedes</p>
+            <h2 class="text-uppercase fw-bold" th:text="#{contacto.titulo}">Estemos en contacto</h2>
+            <p th:text="#{contacto.descripcion}">Comunícate con nosotros en cualquiera de nuestras sedes</p>
             <p><strong>Guayabos:</strong> 2271-0915 | <a href="#" class="text-warning">8787-0054</a></p>
             <p><strong>Moravia:</strong> 2235-3660 | <a href="#" class="text-warning">8787-0056</a></p>
             <p><strong>Irazú:</strong> 2220-4410 | <a href="#" class="text-warning">8868-8785</a></p>
