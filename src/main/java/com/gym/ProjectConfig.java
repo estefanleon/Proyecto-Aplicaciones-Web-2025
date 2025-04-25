@@ -1,8 +1,9 @@
-
 package com.gym;
 
+import com.paypal.base.rest.APIContext;
 import java.util.List;
 import java.util.Locale;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.LocaleResolver;
@@ -14,11 +15,10 @@ import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 import org.thymeleaf.spring6.templateresolver.SpringResourceTemplateResolver;
 import org.thymeleaf.templatemode.TemplateMode;
 
-
 @Configuration
-public class ProjectConfig implements WebMvcConfigurer{
-    
-@Bean
+public class ProjectConfig implements WebMvcConfigurer {
+
+    @Bean
     public LocaleResolver localeResolver() {
         var slr = new SessionLocaleResolver();
         slr.setDefaultLocale(Locale.getDefault());
@@ -26,16 +26,31 @@ public class ProjectConfig implements WebMvcConfigurer{
         slr.setTimeZoneAttributeName("session.current.timezone");
         return slr;
     }
+
     @Bean
     public LocaleChangeInterceptor localeChangeInterceptor() {
-       var lci=new LocaleChangeInterceptor();
-       lci.setParamName("lang");
-       return lci;
+        var lci = new LocaleChangeInterceptor();
+        lci.setParamName("lang");
+        return lci;
     }
+
     @Override
     public void addInterceptors(InterceptorRegistry registro) {
         registro.addInterceptor(localeChangeInterceptor());
     }
-    
-    
+
+    // para integracion con paypal
+    @Value("${paypal.client-id}")
+    private String clientId;
+    @Value("${paypal.client-secret}")
+    private String clientSecret;
+    @Value("${paypal.client-mode}")
+    private String mode;
+
+    @Bean
+    public APIContext apiContext() {
+        return new APIContext(clientId, clientSecret, mode);
+
+    }
+
 }

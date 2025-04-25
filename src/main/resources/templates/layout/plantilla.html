@@ -7,30 +7,17 @@
         <meta charset="UTF-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
-        <!-- ✅ Favicon -->
         <link rel="icon" type="image/png" sizes="32x32" href="/fav/favicon-32x32.png"/>
-
-        <!-- ✅ Bootstrap y FontAwesome desde WebJars -->
         <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.0/css/bootstrap.min.css}"/>
         <link rel="stylesheet" th:href="@{/webjars/font-awesome/6.4.2/css/all.min.css}"/>
-
-        <!-- ✅ CSS personalizado -->
         <link rel="stylesheet" th:href="@{/css/styles.css}"/>
-
-        <!-- ✅ JavaScript de Bootstrap y jQuery -->
         <script th:src="@{/webjars/jquery/3.6.0/jquery.min.js}"></script>
         <script th:src="@{/webjars/bootstrap/5.3.0/js/bootstrap.bundle.min.js}"></script>
-        
-        
-        
-        
-        
     </head>
 
     <body>
-<div id="debugSessionUser" th:text="${session.usuario}" style="display: none;"></div>
+        <div id="debugSessionUser" th:text="${session.usuario}" style="display: none;"></div>
 
-        <!-- ✅ NAVBAR (Encabezado) -->
         <header th:fragment="header" class="header">
             <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
                 <div class="container">
@@ -40,103 +27,91 @@
                     </button>
                     <div class="collapse navbar-collapse" id="navbarNav">
 
+                        <ul class="navbar-nav me-auto">
 
+                            <li class="nav-item" th:if="${session.usuario != null and session.usuario.role.name() == 'ADMIN'}">
+                                <a class="nav-link" th:href="@{/user/listado}">Usuarios</a>
+                            </li>
 
-<ul class="navbar-nav me-auto">
-    <!-- ✅ Mostrar "Usuarios" solo si el usuario es ADMIN -->
-    
-    <li class="nav-item" th:if="${session.usuario != null and session.usuario.role.name() == 'ADMIN'}">
-    <a class="nav-link" th:href="@{/user/listado}">Usuarios</a>
-</li>
+                            <li class="nav-item" th:if="${session.usuario != null and session.usuario.role.name() == 'ADMIN'}">
+                                <a class="nav-link" th:href="@{/equipo/listado}">Equipo</a>
+                            </li>
 
-      
-          
-          
-        <li class="nav-item" th:if="${session.usuario != null and session.usuario.role.name() == 'ADMIN'}">
-    <a class="nav-link" th:href="@{/equipo/listado}">Equipo</a>
-</li>
-    
-    <li class="nav-item" th:if="${session.usuario != null and session.usuario.role.name() == 'ADMIN'}">
-    <a class="nav-link" th:href="@{/admin/clases/listado}">Clases</a>
-</li>
+                            <li class="nav-item" th:if="${session.usuario != null and session.usuario.role.name() == 'ADMIN'}">
+                                <a class="nav-link" th:href="@{/admin/clases/listado}">Clases</a>
+                            </li>
 
-    <li class="nav-item" th:if="${session.usuario != null and session.usuario.role.name() == 'USER'}">
-    <a class="nav-link" th:href="@{/cita/solicitar}">Solicitar Cita</a>
-</li>
+                            <li class="nav-item" th:if="${session.usuario != null and session.usuario.role.name() == 'USER'}">
+                                <a class="nav-link" th:href="@{/cita/solicitar}">Solicitar Cita</a>
+                            </li>
 
+                            <li class="nav-item" th:if="${session.usuario != null and session.usuario.role.name() == 'TRAINER'}">
+                                <a class="nav-link" th:href="@{/cita/listado}">Citas Asignadas</a>
+                            </li>
 
-<li class="nav-item" th:if="${session.usuario != null and session.usuario.role.name() == 'TRAINER'}">
-    <a class="nav-link" th:href="@{/cita/listado}">Citas Asignadas</a>
-</li>
+                            <li class="nav-item" th:if="${session.usuario != null and session.usuario.role.name() == 'ADMIN'}">
+                                <a class="nav-link" th:href="@{/ganancia/ganancias}">Reporte de Ganancias</a>
+                            </li>
 
+                            <li class="nav-item px-2" th:if="${session.usuario != null and session.usuario.role.name() == 'USER'}">
+                                <a class="nav-link" th:href="@{/historial}">Historial</a>
+                            </li>
 
-    <li class="nav-item" th:if="${session.usuario != null and session.usuario.role.name() == 'ADMIN'}">
-    <a class="nav-link" th:href="@{/ganancia/ganancias}">Reporte de Ganancias</a>
-</li>
+                            <li class="nav-item px-2" th:if="${session.usuario != null and session.usuario.role.name() == 'USER'}">
+                                <a class="nav-link" th:href="@{/perfil}">Perfil</a>
+                            </li>
 
-        <li class="nav-item px-2" th:if="${session.usuario != null and session.usuario.role.name() == 'USER'}">
-        <a class="nav-link" th:href="@{/historial}">Historial</a>
-    </li>
+                            <!-- ✅ NUEVO BOTÓN DE MATRÍCULA -->
+                            <li class="nav-item px-2" th:if="${session.usuario != null and session.usuario.role.name() == 'USER'}">
+                                <a class="nav-link" th:href="@{/matricula/resumen(id=1)}">Resumen de Matrícula</a>
+                            </li>
 
-    
-    
-        <li class="nav-item px-2" th:if="${session.usuario != null and session.usuario.role.name() == 'USER'}">
-        <a class="nav-link" th:href="@{/perfil}">Perfil</a>
-    </li>
-    
-    <li class="nav-item px-2"><a class="nav-link" th:href="@{/instalaciones}">Instalaciones</a></li>
-    
-    <li class="nav-item">
-    <a class="nav-link" th:href="@{/clases}">Horarios Clases</a>
-</li>
+                            <li class="nav-item px-2">
+                                <a class="nav-link" th:href="@{/instalaciones}">Instalaciones</a>
+                            </li>
 
-    
-    <li class="nav-item px-2"><a class="nav-link" th:href="@{/clasesindex}">Clases</a></li>
+                            <li class="nav-item">
+                                <a class="nav-link" th:href="@{/clases}">Horarios Clases</a>
+                            </li>
 
-    <li class="nav-item px-2"><a class="nav-link" th:href="@{/matricula}">Matrícula</a></li>
-    <li class="nav-item px-2"><a class="nav-link" th:href="@{/contacto}">Contacto</a></li>
-    <li class="nav-item px-2"><a class="nav-link" th:href="@{/EntrenadorIndex}">Entrenadores</a></li>
-    <li class="nav-item px-2"><a class="nav-link" th:href="@{/blog}">Blog</a></li>
-    <li class="nav-item px-2"><a class="nav-link" th:href="@{/QuejasSugerencias}">Quejas y Sugerencias</a></li>
+                            <li class="nav-item px-2"><a class="nav-link" th:href="@{/clasesindex}">Clases</a></li>
+                            <li class="nav-item px-2"><a class="nav-link" th:href="@{/matricula}">Matrícula</a></li>
+                            <li class="nav-item px-2"><a class="nav-link" th:href="@{/contacto}">Contacto</a></li>
+                            <li class="nav-item px-2"><a class="nav-link" th:href="@{/EntrenadorIndex}">Entrenadores</a></li>
+                            <li class="nav-item px-2"><a class="nav-link" th:href="@{/blog}">Blog</a></li>
+                            <li class="nav-item px-2"><a class="nav-link" th:href="@{/QuejasSugerencias}">Quejas y Sugerencias</a></li>
 
-        <li class="nav-item" th:if="${session.usuario != null and session.usuario.role.name() == 'USER'}">
-    <a class="nav-link" th:href="@{/entrenamientos}">Entrenamiento</a>
-</li>
-    
+                            <li class="nav-item" th:if="${session.usuario != null and session.usuario.role.name() == 'USER'}">
+                                <a class="nav-link" th:href="@{/entrenamientos}">Entrenamiento</a>
+                            </li>
 
-</ul>
+                        </ul>
 
-<ul class="navbar-nav">
-    <!-- ✅ Mostrar botón de login solo si NO hay usuario autenticado -->
-    <li class="nav-item" th:if="${session.usuario == null}">
-        <a class="nav-link btn btn-primary text-white" th:href="@{/login}">Iniciar Sesión</a>
-    </li>
+                        <ul class="navbar-nav">
+                            <li class="nav-item" th:if="${session.usuario == null}">
+                                <a class="nav-link btn btn-primary text-white" th:href="@{/login}">Iniciar Sesión</a>
+                            </li>
 
-    <!-- ✅ Mostrar el nombre del usuario si está autenticado -->
-    <li class="nav-item dropdown" th:if="${session.usuario != null}">
-        <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
-           data-bs-toggle="dropdown" aria-expanded="false">
-            <i class="fas fa-user"></i> <span th:text="${session.usuario.name}"></span>
-        </a>
-        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
-            <li><a class="dropdown-item" th:href="@{/logout}">Cerrar Sesión</a></li>
-        </ul>
-    </li>
-</ul>
-
-
+                            <li class="nav-item dropdown" th:if="${session.usuario != null}">
+                                <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                                   data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="fas fa-user"></i> <span th:text="${session.usuario.name}"></span>
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                                    <li><a class="dropdown-item" th:href="@{/logout}">Cerrar Sesión</a></li>
+                                </ul>
+                            </li>
+                        </ul>
 
                     </div>
                 </div>
             </nav>
         </header>
 
-        <!-- ✅ CONTENIDO DINÁMICO -->
         <main class="container mt-4">
             <th:block th:replace="~{::content}"></th:block>
         </main>
 
-        <!-- ✅ FOOTER -->
         <footer th:fragment="footer" class="p-3 mt-4 bg-dark text-white text-center">
             <p>&COPY; 2025 GymApp - Todos los derechos reservados</p>
         </footer>

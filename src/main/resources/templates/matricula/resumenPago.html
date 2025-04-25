@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout/plantilla :: head}">
+    <title>Resumen de Pago</title>
+    <meta charset="UTF-8"/>
+</head>
+<body>
+<header th:replace="~{layout/plantilla :: header}"/>
+
+<section class="container mt-5">
+    <h2 class="text-center">Resumen de Matrícula</h2>
+
+    <div class="mt-4">
+        <p><strong>Nombre del Plan:</strong> [[${plan.nombre}]]</p>
+        <p><strong>Descripción:</strong> [[${plan.descripcion}]]</p>
+        <p><strong>Precio en colones:</strong> ₡[[${#numbers.formatDecimal(plan.precio,1,'DEFAULT',2,'DEFAULT')}]]</p>
+        <p><strong>Tipo de cambio:</strong> ₡[[${#numbers.formatDecimal(precioVenta,1,'DEFAULT',2,'DEFAULT')}]]</p>
+        <p><strong>Total en dólares:</strong> $[[${#numbers.formatDecimal(totalDolares,1,'DEFAULT',2,'DEFAULT')}]]</p>
+    </div>
+
+    <form action="/payment/facturar" method="post" class="mt-4">
+        <input type="hidden" name="total" th:value="${totalDolares}" />
+        <button class="btn btn-primary" type="submit">
+            <i class="fab fa-cc-paypal"></i> Pagar con PayPal
+        </button>
+    </form>
+</section>
+
+<footer th:replace="~{layout/plantilla :: footer}"/>
+</body>
+</html>
